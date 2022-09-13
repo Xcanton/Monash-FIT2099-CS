@@ -4,6 +4,6 @@ import edu.monash.fit2099.engine.weapons.WeaponItem;
 
 public class VineWhip extends WeaponItem{
     public VineWhip(){
-        super("Ember", 'e', 20, "whips", 90);
+        super("Vine Whip", 'w', 30, "whips", 70);
     }
 }
