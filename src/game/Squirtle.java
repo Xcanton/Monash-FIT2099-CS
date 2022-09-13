@@ -20,17 +20,17 @@ import java.util.Map;
  * @author Riordan D. Alfredo
  * Modified by:
  */
-public class Charmander extends Actor {
+public class Squirtle extends Actor {
     //FIXME: Change it to a sorted map (is it TreeMap? HashMap? LinkedHashMap?)
     private final Map<Integer, Behaviour> behaviours = new HashMap<>(); // priority, behaviour
 
     /**
      * Constructor.
      */
-    public Charmander() {
-        super("Charmander", 'c', 100);
+    public Squirtle() {
+        super("Squirtle", 's', 100);
         // HINT: add more relevant behaviours here
-        this.addCapability(Element.FIRE);
+        this.addCapability(Element.WATER);
         this.behaviours.put(10, new WanderBehaviour());
         this.behaviours.put(10, new AttackBehaviour());
     }
