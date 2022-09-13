@@ -7,6 +7,7 @@ import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.actions.DoNothingAction;
 import edu.monash.fit2099.engine.positions.GameMap;
+import edu.monash.fit2099.engine.weapons.IntrinsicWeapon;
 import game.behaviours.AttackBehaviour;
 import game.behaviours.Behaviour;
 import game.behaviours.WanderBehaviour;
@@ -23,13 +24,13 @@ import java.util.Map;
 public class Charmander extends Actor {
     //FIXME: Change it to a sorted map (is it TreeMap? HashMap? LinkedHashMap?)
     private final Map<Integer, Behaviour> behaviours = new HashMap<>(); // priority, behaviour
-
     /**
      * Constructor.
      */
     public Charmander() {
         super("Charmander", 'c', 100);
         // HINT: add more relevant behaviours here
+        IntrinsicWeapon intrinsicWeapon= new IntrinsicWeapon(10,"scratches");
         this.addCapability(Element.FIRE);
         this.behaviours.put(10, new WanderBehaviour());
         this.behaviours.put(10, new AttackBehaviour());

@@ -7,6 +7,7 @@ import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.actions.DoNothingAction;
 import edu.monash.fit2099.engine.positions.GameMap;
+import edu.monash.fit2099.engine.weapons.IntrinsicWeapon;
 import game.behaviours.AttackBehaviour;
 import game.behaviours.Behaviour;
 import game.behaviours.WanderBehaviour;
@@ -31,6 +32,7 @@ public class Squirtle extends Actor {
         super("Squirtle", 's', 100);
         // HINT: add more relevant behaviours here
         this.addCapability(Element.WATER);
+        IntrinsicWeapon intrinsicWeapon= new IntrinsicWeapon(10,"tackles");
         this.behaviours.put(10, new WanderBehaviour());
         this.behaviours.put(10, new AttackBehaviour());
     }
