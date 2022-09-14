@@ -1,5 +1,6 @@
 package game.time;
 
+import java.sql.Time;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -34,10 +35,10 @@ public class TimePerceptionManager {
      *
      * @return TimePerceptionManager singleton instance
      *
-     * FIXME: create a singleton instance.
      */
     public static TimePerceptionManager getInstance() {
-        return null;
+        TimePerceptionManager timePerceptionManager= new TimePerceptionManager();
+        return timePerceptionManager;
     }
 
     /**
@@ -60,10 +61,10 @@ public class TimePerceptionManager {
 
     /**
      * Add the TimePerception instance to the list
-     * FIXME: add objInstance to the list.
      * @param objInstance any instance that implements TimePerception
      */
     public void append(TimePerception objInstance) {
+    timePerceptionList.add(objInstance);
     }
 
 
