@@ -22,7 +22,7 @@ public class AffectionManager {
     /**
      * HINT: is it just for a Charmander?
      */
-    private final Map<Charmander, Integer> affectionPoints;
+    private final Map<Actor, Integer> affectionPoints;
 
     /**
      * We assume there's only one trainer in this manager.
@@ -63,7 +63,7 @@ public class AffectionManager {
      *
      * @param pokemon
      */
-    public void registerPokemon(Charmander pokemon) {
+    public void registerPokemon(Actor pokemon) {
     }
 
     /**
@@ -72,7 +72,7 @@ public class AffectionManager {
      * @param pokemon Pokemon instance
      * @return integer of affection point.
      */
-    public int getAffectionPoint(Charmander pokemon) {
+    public int getAffectionPoint(Actor pokemon) {
         return affectionPoints.get(pokemon);
     }
 
@@ -82,8 +82,8 @@ public class AffectionManager {
      * @param actor general actor instance
      * @return the Pokemon instance.
      */
-    private Charmander findPokemon(Actor actor) {
-        for (Charmander pokemon : affectionPoints.keySet()) {
+    private Actor findPokemon(Actor actor) {
+        for (Actor pokemon : affectionPoints.keySet()) {
             if (pokemon.equals(actor)) {
                 return pokemon;
             }
