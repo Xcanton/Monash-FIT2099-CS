@@ -19,7 +19,7 @@ import java.util.Map;
  * Created by:
  *
  * @author Riordan D. Alfredo
- * Modified by:
+ * Modified by: Chongjie Chen
  */
 public class Charmander extends Actor {
     //FIXME: Change it to a sorted map (is it TreeMap? HashMap? LinkedHashMap?)

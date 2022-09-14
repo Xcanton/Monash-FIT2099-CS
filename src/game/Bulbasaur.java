@@ -19,7 +19,7 @@ import java.util.Map;
 /**
  * Created by:
  *
- * @author Riordan D. Alfredo
+ * @author Chongjie Chen
  * Modified by:
  */
 public class Bulbasaur extends Actor {
