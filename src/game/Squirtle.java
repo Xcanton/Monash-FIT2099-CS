@@ -32,6 +32,7 @@ public class Squirtle extends Actor {
         super("Squirtle", 's', 100);
         // HINT: add more relevant behaviours here
         this.addCapability(Element.WATER);
+        this.addCapability(Status.CATCHABLE);
         IntrinsicWeapon intrinsicWeapon= new IntrinsicWeapon(10,"tackles");
         this.behaviours.put(10, new WanderBehaviour());
         this.behaviours.put(10, new AttackBehaviour());

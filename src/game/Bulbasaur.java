@@ -33,6 +33,7 @@ public class Bulbasaur extends Actor {
         super("Bulbasaur", 'b', 100);
         // HINT: add more relevant behaviours here
         this.addCapability(Element.GRASS);
+        this.addCapability(Status.CATCHABLE);
         IntrinsicWeapon intrinsicWeapon= new IntrinsicWeapon(10,"tackles");
         this.behaviours.put(10, new WanderBehaviour());
         this.behaviours.put(10, new AttackBehaviour());
