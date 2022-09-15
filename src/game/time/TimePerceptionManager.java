@@ -56,6 +56,12 @@ public class TimePerceptionManager {
      * FIXME: write a relevant logic (i.e., increment turns choose day or night) and call this method once at every turn.
      */
     public void run() {
+        switch(shift){
+            case DAY:
+
+            case NIGHT:
+        }
+        turn+=1;
     }
 
 
