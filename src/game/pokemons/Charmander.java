@@ -13,6 +13,8 @@ import game.Element;
 import game.behaviours.AttackBehaviour;
 import game.behaviours.Behaviour;
 import game.behaviours.WanderBehaviour;
+import game.time.TimePerception;
+import game.time.TimePerceptionManager;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -23,7 +25,7 @@ import java.util.Map;
  * @author Riordan D. Alfredo
  * Modified by: Chongjie Chen
  */
-public class Charmander extends Actor {
+public class Charmander extends Actor implements TimePerception {
     //FIXME: Change it to a sorted map (is it TreeMap? HashMap? LinkedHashMap?)
     private final Map<Integer, Behaviour> behaviours = new HashMap<>(); // priority, behaviour
     /**
@@ -36,6 +38,7 @@ public class Charmander extends Actor {
         this.addCapability(Element.FIRE);
         this.behaviours.put(10, new WanderBehaviour());
         this.behaviours.put(10, new AttackBehaviour());
+
     }
 
     /**
@@ -73,4 +76,13 @@ public class Charmander extends Actor {
     public void toggleWeapon(boolean isEquipping) {
     }
 
+    @Override
+    public void dayEffect() {
+        heal(10);
+    }
+
+    @Override
+    public void nightEffect() {
+        hurt(10);
+    }
 }

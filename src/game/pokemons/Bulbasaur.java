@@ -15,6 +15,7 @@ import game.behaviours.AttackBehaviour;
 import game.behaviours.Behaviour;
 import game.behaviours.FollowBehaviour;
 import game.behaviours.WanderBehaviour;
+import game.time.TimePerception;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -25,7 +26,7 @@ import java.util.Map;
  * @author Chongjie Chen
  * Modified by:
  */
-public class Bulbasaur extends Actor {
+public class Bulbasaur extends Actor implements TimePerception {
     //FIXME: Change it to a sorted map (is it TreeMap? HashMap? LinkedHashMap?)
     private final Map<Integer, Behaviour> behaviours = new HashMap<>(); // priority, behaviour
 
@@ -78,4 +79,13 @@ public class Bulbasaur extends Actor {
     }
 
 
+    @Override
+    public void dayEffect() {
+        hurt(5);
+    }
+
+    @Override
+    public void nightEffect() {
+        heal(5);
+    }
 }
