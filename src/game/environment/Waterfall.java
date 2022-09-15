@@ -1,14 +1,16 @@
-package game;
+package game.environment;
 
 import edu.monash.fit2099.engine.positions.Ground;
+import game.Element;
 
-public class Puddle extends Ground {
+public class Waterfall extends SpawningGround {
+
     /**
      * Constructor.
      *
      */
-    public Puddle() {
-        super('~');
+    public Waterfall() {
+        super('W',20,20);
         this.addCapability(Element.WATER);
     }
 }

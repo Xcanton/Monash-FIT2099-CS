@@ -1,4 +1,4 @@
-package game;
+package game.pokemons;
 
 
 import edu.monash.fit2099.engine.actions.Action;
@@ -8,6 +8,9 @@ import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.actions.DoNothingAction;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.weapons.IntrinsicWeapon;
+import game.AttackAction;
+import game.Element;
+import game.Status;
 import game.behaviours.AttackBehaviour;
 import game.behaviours.Behaviour;
 import game.behaviours.WanderBehaviour;
@@ -18,20 +21,22 @@ import java.util.Map;
 /**
  * Created by:
  *
- * @author Riordan D. Alfredo
- * Modified by: Chongjie Chen
+ * @author Chongjie Chen
+ * Modified by:
  */
-public class Charmander extends Actor {
+public class Squirtle extends Actor {
     //FIXME: Change it to a sorted map (is it TreeMap? HashMap? LinkedHashMap?)
     private final Map<Integer, Behaviour> behaviours = new HashMap<>(); // priority, behaviour
+
     /**
      * Constructor.
      */
-    public Charmander() {
-        super("Charmander", 'c', 100);
+    public Squirtle() {
+        super("Squirtle", 's', 100);
         // HINT: add more relevant behaviours here
-        IntrinsicWeapon intrinsicWeapon= new IntrinsicWeapon(10,"scratches");
-        this.addCapability(Element.FIRE);
+        this.addCapability(Element.WATER);
+        this.addCapability(Status.CATCHABLE);
+        IntrinsicWeapon intrinsicWeapon= new IntrinsicWeapon(10,"tackles");
         this.behaviours.put(10, new WanderBehaviour());
         this.behaviours.put(10, new AttackBehaviour());
     }

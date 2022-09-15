@@ -1,14 +1,15 @@
-package game;
+package game.items;
 
 import edu.monash.fit2099.engine.weapons.WeaponItem;
+
 /**
  * Created by:
  *
  * @author Chongjie Chen
  * Modified by:
  */
-public class VineWhip extends WeaponItem{
-    public VineWhip(){
-        super("Vine Whip", 'w', 30, "whips", 70);
+public class Ember extends WeaponItem{
+    public Ember(){
+        super("Ember", 'e', 20, "sparks", 90);
     }
 }
