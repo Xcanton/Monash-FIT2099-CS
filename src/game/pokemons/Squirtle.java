@@ -81,10 +81,12 @@ public class Squirtle extends Actor implements TimePerception {
     @Override
     public void dayEffect() {
         hurt(10);
+        System.out.println(printHp());
     }
 
     @Override
     public void nightEffect() {
         heal(10);
+        System.out.println(printHp());
     }
 }
