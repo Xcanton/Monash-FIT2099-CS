@@ -9,5 +9,6 @@ public class Puddle extends Ground {
      */
     public Puddle() {
         super('~');
+        this.addCapability(Element.WATER);
     }
 }
