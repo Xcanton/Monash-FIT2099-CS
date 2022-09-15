@@ -6,10 +6,8 @@ import game.Element;
 public class Hay extends Ground {
     /**
      * Constructor.
-     *
-     * @param displayChar character to display for this type of terrain
      */
-    public Hay(char displayChar) {
+    public Hay() {
         super(',');
         this.addCapability(Element.GRASS);
     }

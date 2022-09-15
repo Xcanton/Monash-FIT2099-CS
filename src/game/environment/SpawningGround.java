@@ -9,7 +9,7 @@ public abstract class SpawningGround extends Ground {
      * Constructor.
      *
      * @param displayChar character to display for this type of terrain
-     * @param spawnChance
+     * @param spawnChance 
      * @param dropChance
      */
     public SpawningGround(char displayChar, int spawnChance, int dropChance) {

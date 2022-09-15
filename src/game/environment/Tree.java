@@ -10,7 +10,7 @@ public class Tree extends SpawningGround {
      *
      */
     public Tree() {
-        super('+',15,15);
+        super('T',15,15);
         this.addCapability(Element.GRASS);
     }
 }
