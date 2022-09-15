@@ -37,7 +37,6 @@ public class Charmander extends Actor implements TimePerception {
         IntrinsicWeapon intrinsicWeapon= new IntrinsicWeapon(10,"scratches");
         this.addCapability(Element.FIRE);
         this.behaviours.put(10, new WanderBehaviour());
-        this.behaviours.put(10, new AttackBehaviour());
         this.registerInstance();
 
     }
@@ -80,10 +79,12 @@ public class Charmander extends Actor implements TimePerception {
     @Override
     public void dayEffect() {
         heal(10);
+        System.out.println(printHp());
     }
 
     @Override
     public void nightEffect() {
         hurt(10);
+        System.out.println(printHp());
     }
 }
