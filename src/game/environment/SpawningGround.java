@@ -2,7 +2,7 @@ package game.environment;
 
 import edu.monash.fit2099.engine.positions.Ground;
 
-public class SpawningGround extends Ground {
+public abstract class SpawningGround extends Ground {
     private final int spawnChance;
     private final int dropChance;
     /**
