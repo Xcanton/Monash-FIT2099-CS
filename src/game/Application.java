@@ -9,7 +9,9 @@ import edu.monash.fit2099.engine.positions.FancyGroundFactory;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.World;
 import game.environment.*;
+import game.pokemons.Bulbasaur;
 import game.pokemons.Charmander;
+import game.pokemons.Squirtle;
 import game.time.TimePerceptionManager;
 
 /**
@@ -29,7 +31,7 @@ public class Application {
                 new Floor(), new Tree(), new Lava(), new Puddle(),
                 new Crater(), new Waterfall(), new Hay(), new Lava());
 
-        TimePerceptionManager timePerceptionManager= null;
+
         List<String> map = Arrays.asList(
                 ".............................................^^^^^^^^^^^^^^",
                 "...........,T,................................,T,..^^^^O^^^",
@@ -46,7 +48,6 @@ public class Application {
                 "~~~~~~~~~............................,.....................");
         GameMap gameMap = new GameMap(groundFactory, map);
         world.addGameMap(gameMap);
-        timePerceptionManager=TimePerceptionManager.getInstance();
 
         //Add player - Ash
         Player ash = new Player("Ash", '@', 1);
@@ -55,8 +56,12 @@ public class Application {
         //Add first pokemon - Charmander
         Actor charmander = new Charmander();
         gameMap.at(33, 10).addActor(charmander);
-        timePerceptionManager.append(charmander );
 
+        Actor bulbasaur = new Bulbasaur();
+        gameMap.at(34, 10).addActor(bulbasaur);
+
+        Actor squirtle = new Squirtle();
+        gameMap.at(35, 10).addActor(squirtle);
         world.run();
 
     }
