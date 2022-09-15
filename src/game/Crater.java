@@ -9,7 +9,7 @@ public class Crater extends Ground {
      * @param displayChar character to display for this type of terrain
      */
     public Crater(char displayChar) {
-        super('o');
+        super('O');
         this.addCapability(Element.FIRE);
     }
 }

@@ -9,7 +9,7 @@ public class Waterfall extends Ground {
      * @param displayChar character to display for this type of terrain
      */
     public Waterfall(char displayChar) {
-        super('w');
+        super('W');
         this.addCapability(Element.WATER);
     }
 }
