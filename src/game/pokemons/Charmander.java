@@ -38,6 +38,7 @@ public class Charmander extends Actor implements TimePerception {
         this.addCapability(Element.FIRE);
         this.behaviours.put(10, new WanderBehaviour());
         this.behaviours.put(10, new AttackBehaviour());
+        this.registerInstance();
 
     }
 

@@ -40,6 +40,7 @@ public class Squirtle extends Actor implements TimePerception {
         IntrinsicWeapon intrinsicWeapon= new IntrinsicWeapon(10,"tackles");
         this.behaviours.put(10, new WanderBehaviour());
         this.behaviours.put(10, new AttackBehaviour());
+        this.registerInstance();
     }
 
     /**
