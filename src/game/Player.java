@@ -6,6 +6,7 @@ import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.displays.Menu;
+import game.time.TimePerceptionManager;
 
 /**
  * Class representing the Player.
@@ -18,6 +19,7 @@ import edu.monash.fit2099.engine.displays.Menu;
 public class Player extends Actor {
 
 	private final Menu menu = new Menu();
+	private TimePerceptionManager timePerceptionManager= null;
 
 	/**
 	 * Constructor.
@@ -29,16 +31,19 @@ public class Player extends Actor {
 	public Player(String name, char displayChar, int hitPoints) {
 		super(name, displayChar, hitPoints);
 		this.addCapability(Status.IMMUNE);
+		timePerceptionManager=TimePerceptionManager.getInstance();
 	}
 
 	@Override
 	public Action playTurn(ActionList actions, Action lastAction, GameMap map, Display display) {
+		timePerceptionManager.run();
 		// Handle multi-turn Actions
 		if (lastAction.getNextAction() != null)
 			return lastAction.getNextAction();
 
 		// return/print the console menu
 		return menu.showMenu(this, actions, display);
+
 	}
 
 	@Override
