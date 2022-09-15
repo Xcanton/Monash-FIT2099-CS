@@ -28,7 +28,7 @@ public class TimePerceptionManager {
     /**
      * A singleton instance
      */
-    private static TimePerceptionManager instance;
+    private static TimePerceptionManager instance= null;
 
     /**
      * Get the singleton instance of time perception manager
@@ -37,8 +37,10 @@ public class TimePerceptionManager {
      *
      */
     public static TimePerceptionManager getInstance() {
-        TimePerceptionManager timePerceptionManager= new TimePerceptionManager();
-        return timePerceptionManager;
+        if (instance == null) {
+            instance = new TimePerceptionManager();
+        }
+        return instance;
     }
 
     /**
