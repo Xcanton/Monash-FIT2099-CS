@@ -5,7 +5,7 @@ public class Tools {
     }
     public static boolean chanceSimulation(int chance){
         Random rand = new Random();
-        return rand.nextInt(100) <= 10;
+        return rand.nextInt(100) <= chance;
 
     }
 }
