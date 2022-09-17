@@ -26,6 +26,7 @@ public class SpawnManager {
                         try{
                             Charmander charmander= new Charmander();
                             gameMap.at(x,y).addActor(charmander);
+                            gameMap.at(x,y).getGround().removeCapability(Spawn.CHARMANDER);
                             break;}
                         catch (IllegalArgumentException e){
                             continue;
@@ -35,6 +36,7 @@ public class SpawnManager {
                         try{
                             Squirtle squirtle= new Squirtle();
                             gameMap.at(x,y).addActor(squirtle);
+                            gameMap.at(x,y).getGround().removeCapability(Spawn.SQUIRTLE);
                             break;
                         }
                         catch (IllegalArgumentException e){
@@ -44,6 +46,7 @@ public class SpawnManager {
                         try {
                             Bulbasaur bulbasaur = new Bulbasaur();
                             gameMap.at(x, y).addActor(bulbasaur);
+                            gameMap.at(x,y).getGround().removeCapability(Spawn.BULBASAUR);
                             break;
                         }
                         catch (IllegalArgumentException e){
