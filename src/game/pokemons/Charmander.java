@@ -10,11 +10,9 @@ import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.weapons.IntrinsicWeapon;
 import game.AttackAction;
 import game.Element;
-import game.behaviours.AttackBehaviour;
 import game.behaviours.Behaviour;
 import game.behaviours.WanderBehaviour;
 import game.time.TimePerception;
-import game.time.TimePerceptionManager;
 
 import java.util.HashMap;
 import java.util.Map;
