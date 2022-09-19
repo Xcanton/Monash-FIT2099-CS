@@ -20,10 +20,9 @@ public class AttackBehaviour implements Behaviour {
      */
     @Override
     public Action getAction(Actor actor, GameMap map) {
-        Actor fakeOtherActor = new Bulbasaur();
-        // FIXME: fakeOtherActor is a completely new instance that doesn't exist anywhere in the map! Check the requirement.
-        if(ElementsHelper.hasAnySimilarElements(actor, fakeOtherActor.findCapabilitiesByType(Element.class))){
-            return new AttackAction(fakeOtherActor, "here"); // behaviour will stop here.
+        Actor otherActor = Tools.checkActorSurroundings(actor, map.locationOf(actor));
+        if(otherActor!=null && !otherActor.hasCapability(Status.IMMUNE)){
+            return new AttackAction(otherActor, "here"); // behaviour will stop here.
         }
         return null; // go to next behaviour
     }
