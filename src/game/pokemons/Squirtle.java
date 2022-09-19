@@ -8,6 +8,7 @@ import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.actions.DoNothingAction;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.weapons.IntrinsicWeapon;
+import edu.monash.fit2099.engine.weapons.Weapon;
 import game.AttackAction;
 import game.Element;
 import game.Status;
@@ -28,7 +29,7 @@ import java.util.Map;
 public class Squirtle extends Actor implements TimePerception {
     //FIXME: Change it to a sorted map (is it TreeMap? HashMap? LinkedHashMap?)
     private final Map<Integer, Behaviour> behaviours = new HashMap<>(); // priority, behaviour
-
+    private IntrinsicWeapon intrinsicWeapon;
     /**
      * Constructor.
      */
@@ -38,8 +39,8 @@ public class Squirtle extends Actor implements TimePerception {
         this.addCapability(Element.WATER);
         this.addCapability(Status.CATCHABLE);
         IntrinsicWeapon intrinsicWeapon= new IntrinsicWeapon(10,"tackles");
-        this.behaviours.put(10, new WanderBehaviour());
-        this.behaviours.put(10, new AttackBehaviour());
+        this.behaviours.put(2, new WanderBehaviour());
+        this.behaviours.put(1, new AttackBehaviour());
         this.registerInstance();
     }
 
@@ -88,5 +89,10 @@ public class Squirtle extends Actor implements TimePerception {
     public void nightEffect() {
         heal(10);
         System.out.println(printHp());
+    }
+
+    @Override
+    public IntrinsicWeapon getIntrinsicWeapon() {
+        return intrinsicWeapon;
     }
 }

@@ -29,7 +29,7 @@ import java.util.Map;
 public class Bulbasaur extends Actor implements TimePerception {
     //FIXME: Change it to a sorted map (is it TreeMap? HashMap? LinkedHashMap?)
     private final Map<Integer, Behaviour> behaviours = new HashMap<>(); // priority, behaviour
-
+    private IntrinsicWeapon intrinsicWeapon;
     /**
      * Constructor.
      */
@@ -39,7 +39,8 @@ public class Bulbasaur extends Actor implements TimePerception {
         this.addCapability(Element.GRASS);
         this.addCapability(Status.CATCHABLE);
         IntrinsicWeapon intrinsicWeapon= new IntrinsicWeapon(10,"tackles");
-        this.behaviours.put(10, new WanderBehaviour());
+        this.behaviours.put(2, new WanderBehaviour());
+        this.behaviours.put(1, new AttackBehaviour());
         this.registerInstance();
     }
 
@@ -87,5 +88,9 @@ public class Bulbasaur extends Actor implements TimePerception {
     @Override
     public void nightEffect() {
         heal(5);
+    }
+    @Override
+    public IntrinsicWeapon getIntrinsicWeapon() {
+        return intrinsicWeapon;
     }
 }

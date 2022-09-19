@@ -10,6 +10,7 @@ import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.weapons.IntrinsicWeapon;
 import game.AttackAction;
 import game.Element;
+import game.behaviours.AttackBehaviour;
 import game.behaviours.Behaviour;
 import game.behaviours.WanderBehaviour;
 import game.time.TimePerception;
@@ -26,6 +27,7 @@ import java.util.Map;
 public class Charmander extends Actor implements TimePerception {
     //FIXME: Change it to a sorted map (is it TreeMap? HashMap? LinkedHashMap?)
     private final Map<Integer, Behaviour> behaviours = new HashMap<>(); // priority, behaviour
+    private IntrinsicWeapon intrinsicWeapon;
     /**
      * Constructor.
      */
@@ -34,7 +36,8 @@ public class Charmander extends Actor implements TimePerception {
         // HINT: add more relevant behaviours here
         IntrinsicWeapon intrinsicWeapon= new IntrinsicWeapon(10,"scratches");
         this.addCapability(Element.FIRE);
-        this.behaviours.put(10, new WanderBehaviour());
+        this.behaviours.put(2, new WanderBehaviour());
+        this.behaviours.put(1, new AttackBehaviour());
         this.registerInstance();
 
     }
@@ -84,5 +87,9 @@ public class Charmander extends Actor implements TimePerception {
     public void nightEffect() {
         hurt(10);
         System.out.println(printHp());
+    }
+    @Override
+    public IntrinsicWeapon getIntrinsicWeapon() {
+        return intrinsicWeapon;
     }
 }
