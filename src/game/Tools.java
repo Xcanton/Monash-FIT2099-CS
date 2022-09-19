@@ -1,11 +1,11 @@
 package game;
+import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.Ground;
 import edu.monash.fit2099.engine.positions.Location;
 
-import java.util.Collections;
-import java.util.List;
-import java.util.Random;
+import java.util.*;
+
 public class Tools {
     static GameMap gameMap;
     public Tools(GameMap gameMap) {
@@ -16,22 +16,14 @@ public class Tools {
         return rand.nextInt(100) <= chance;
 
     }
-    public static boolean checkGrassSurrounding(Location location){
-        int check_x, check_y;
-        // check right of ground
-        check_x=location.x()+1;
-        check_y= location.y();
-        ElementsHelper.hasAnySimilarElements(location.getGround(), Collections.singletonList(Element.GRASS));
-        return true;
-    }
-    public static boolean checkElementSurroundings(Element element, Location location){
+    public static boolean checkGroundSurroundings(Element element, Location location){
         switch(element){
             case WATER :
-                if (checkSurroundings(element,location)==2){
+                if (checkGroundSurroundingsHelper(element,location)==2){
                     return true;
             }
             case GRASS:
-                if (checkSurroundings(element,location)==1){
+                if (checkGroundSurroundingsHelper(element,location)==1){
                     return true;
                 }
             case FIRE:
@@ -39,66 +31,117 @@ public class Tools {
         }
         return false;
     }
+    public static Actor checkActorSurroundings(Actor actor,Location location){
+        return checkActorSurroundingsHelper(actor, location);
+    }
 
-    public static int checkSurroundings(Element element,Location location){
+    public static int checkGroundSurroundingsHelper(Element element,Location location){
         int surroundings = 0;
         Ground ground;
-        List elementCompare;
-        elementCompare=Collections.singletonList(element);
+        List <Element> elementCompare = new ArrayList<>();
+        elementCompare.add(element);
         ground=gameMap.at(location.x()+1, location.y()).getGround(); //Check east
         if (ElementsHelper.hasAnySimilarElements(ground,elementCompare))
         {
             surroundings++;
         }
 
-        gameMap.at(location.x()+1, location.y()+1).getGround(); // check north east
+        ground=gameMap.at(location.x()+1, location.y()+1).getGround(); // check north east
         ElementsHelper.hasAnySimilarElements(ground,elementCompare);
         if (ElementsHelper.hasAnySimilarElements(ground,elementCompare))
         {
             surroundings++;
         }
 
-        gameMap.at(location.x(), location.y()+1).getGround();// check north
+        ground=gameMap.at(location.x(), location.y()+1).getGround();// check north
         ElementsHelper.hasAnySimilarElements(ground,elementCompare);
         if (ElementsHelper.hasAnySimilarElements(ground,elementCompare))
         {
             surroundings++;
         }
 
-        gameMap.at(location.x()-1, location.y()+1).getGround();// check north west
+        ground=gameMap.at(location.x()-1, location.y()+1).getGround();// check north west
         ElementsHelper.hasAnySimilarElements(ground,elementCompare);
         if (ElementsHelper.hasAnySimilarElements(ground,elementCompare))
         {
             surroundings++;
         }
 
-        gameMap.at(location.x()-1, location.y()).getGround();// check west
+        ground=gameMap.at(location.x()-1, location.y()).getGround();// check west
         ElementsHelper.hasAnySimilarElements(ground,elementCompare);
         if (ElementsHelper.hasAnySimilarElements(ground,elementCompare))
         {
             surroundings++;
         }
 
-        gameMap.at(location.x()-1, location.y()-1).getGround();// check south west
+        ground=gameMap.at(location.x()-1, location.y()-1).getGround();// check south west
         ElementsHelper.hasAnySimilarElements(ground,elementCompare);
         if (ElementsHelper.hasAnySimilarElements(ground,elementCompare))
         {
             surroundings++;
         }
 
-        gameMap.at(location.x(), location.y()-1).getGround();// check south
+        ground=gameMap.at(location.x(), location.y()-1).getGround();// check south
         ElementsHelper.hasAnySimilarElements(ground,elementCompare);
         if (ElementsHelper.hasAnySimilarElements(ground,elementCompare))
         {
             surroundings++;
         }
 
-        gameMap.at(location.x()+1, location.y()-1).getGround();// check south east
+        ground=gameMap.at(location.x()+1, location.y()-1).getGround();// check south east
         ElementsHelper.hasAnySimilarElements(ground,elementCompare);
         if (ElementsHelper.hasAnySimilarElements(ground,elementCompare))
         {
             surroundings++;
         }
         return surroundings;
+    }
+    public static Actor checkActorSurroundingsHelper(Actor actor, Location location){
+        Actor otherActor;
+        // list of the actor's element
+        List <Element> actorElement= new ArrayList<>();
+        actorElement.add(actor.findCapabilitiesByType(Element.class).get(0));
+        otherActor=gameMap.at(location.x()+1, location.y()).getActor(); // check east
+        try {
+            if (!ElementsHelper.hasAnySimilarElements(otherActor, actorElement)) {
+                return otherActor;
+            }
+        }catch (NullPointerException e){}
+        try{
+        otherActor=gameMap.at(location.x()+1, location.y()+1).getActor(); // check north east
+        if (!ElementsHelper.hasAnySimilarElements(otherActor, actorElement)&& otherActor!=null) {
+            return otherActor;
+        }}catch (NullPointerException e){}
+        try{
+        otherActor=gameMap.at(location.x(), location.y()+1).getActor();// check north
+        if (!ElementsHelper.hasAnySimilarElements(otherActor, actorElement)&& otherActor!=null) {
+            return otherActor;
+        }}catch (NullPointerException e){}
+        try{
+        otherActor=gameMap.at(location.x()-1, location.y()+1).getActor();// check north west
+        if (!ElementsHelper.hasAnySimilarElements(otherActor, actorElement)&& otherActor!=null) {
+            return otherActor;
+        }}catch (NullPointerException e){}
+        try{
+        otherActor=gameMap.at(location.x()-1, location.y()).getActor();// check west
+        if (!ElementsHelper.hasAnySimilarElements(otherActor, actorElement)&& otherActor!=null) {
+            return otherActor;
+        }}catch (NullPointerException e){}
+        try{
+        otherActor=gameMap.at(location.x()-1, location.y()-1).getActor();// check south west
+        if (!ElementsHelper.hasAnySimilarElements(otherActor, actorElement)&& otherActor!=null) {
+            return otherActor;
+        }}catch (NullPointerException e){}
+        try{
+        otherActor=gameMap.at(location.x(), location.y()-1).getActor();// check south
+        if (!ElementsHelper.hasAnySimilarElements(otherActor, actorElement)&& otherActor!=null) {
+            return otherActor;
+        }}catch (NullPointerException e){}
+        try{
+        otherActor=gameMap.at(location.x()+1, location.y()-1).getActor();// check south east
+        if (!ElementsHelper.hasAnySimilarElements(otherActor, actorElement)&& otherActor!=null) {
+            return otherActor;
+        }}catch (NullPointerException e){}
+        return null;
     }
 }
