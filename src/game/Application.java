@@ -42,6 +42,7 @@ public class Application {
                 "~~~~~~.,T,...........................,T,...................",
                 "~~~~~~~~~............................,.....................");
         GameMap gameMap = new GameMap(groundFactory, map);
+        Tools tools= new Tools(gameMap);
         world.addGameMap(gameMap);
 
         //Add player - Ash
