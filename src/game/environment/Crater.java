@@ -6,8 +6,7 @@ import game.Element;
 import game.Spawn;
 import game.SpawnManager;
 import game.items.Pokefruit;
-import game.pokemons.Charmander;
-import game.time.Tools;
+import game.Tools;
 
 public class Crater extends SpawningGround  {
     private static SpawnManager spawnManager;
@@ -24,12 +23,12 @@ public class Crater extends SpawningGround  {
     @Override
     public void tick(Location location) {
         super.tick(location);
-        if (Tools.chanceSimulation(10)) {
+        if (Tools.chanceSimulation(10) && Tools.checkElementSurroundings(Element.FIRE,location)) {
             this.addCapability(Spawn.CHARMANDER);
+
         }
         if (Tools.chanceSimulation(25)) {
-            Pokefruit pokefruit= new Pokefruit(Element.FIRE);
-            new DropItemAction(pokefruit);
+            this.addCapability(Spawn.FIREFRUIT);
         }
     }
 

@@ -1,13 +1,11 @@
 package game.environment;
 
 import edu.monash.fit2099.engine.items.DropItemAction;
-import edu.monash.fit2099.engine.positions.Ground;
 import edu.monash.fit2099.engine.positions.Location;
 import game.Element;
 import game.Spawn;
 import game.items.Pokefruit;
-import game.pokemons.Charmander;
-import game.time.Tools;
+import game.Tools;
 
 public class Waterfall extends SpawningGround {
 
@@ -23,12 +21,11 @@ public class Waterfall extends SpawningGround {
     @Override
     public void tick(Location location) {
         super.tick(location);
-        if (Tools.chanceSimulation(20)) {
+        if (Tools.chanceSimulation(20) && Tools.checkElementSurroundings(Element.WATER,location)) {
             this.addCapability(Spawn.SQUIRTLE);
         }
         if (Tools.chanceSimulation(20)) {
-            Pokefruit pokefruit= new Pokefruit(Element.WATER);
-            new DropItemAction(pokefruit);
+            this.addCapability(Spawn.WATERFRUIT);
         }
 
     }

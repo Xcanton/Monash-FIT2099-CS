@@ -6,6 +6,9 @@ public enum Spawn {
     BULBASAUR,
     CRATER,
     TREE,
-    WATERFALL;
+    WATERFALL,
+    WATERFRUIT,
+    FIREFRUIT,
+    GRASSFRUIT;
 
 }

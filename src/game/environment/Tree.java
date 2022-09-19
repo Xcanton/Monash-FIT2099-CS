@@ -1,16 +1,12 @@
 package game.environment;
 
-import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.items.DropItemAction;
-import edu.monash.fit2099.engine.positions.Ground;
 import edu.monash.fit2099.engine.positions.Location;
 import game.Element;
 import game.Spawn;
 import game.items.Pokefruit;
-import game.pokemons.Bulbasaur;
-import game.pokemons.Charmander;
 import game.time.TimePerception;
-import game.time.Tools;
+import game.Tools;
 
 public class Tree extends SpawningGround implements TimePerception {
 
@@ -36,13 +32,12 @@ public class Tree extends SpawningGround implements TimePerception {
     @Override
     public void tick(Location location) {
         super.tick(location);
-        if (Tools.chanceSimulation(15)) {
+        if (Tools.chanceSimulation(15) && Tools.checkElementSurroundings(Element.GRASS,location)) {
             this.addCapability(Spawn.BULBASAUR);
 
         }
         if (Tools.chanceSimulation(15)) {
-            Pokefruit pokefruit= new Pokefruit(Element.GRASS);
-            new DropItemAction(pokefruit);
+            this.addCapability(Spawn.GRASSFRUIT);
         }
 
     }
