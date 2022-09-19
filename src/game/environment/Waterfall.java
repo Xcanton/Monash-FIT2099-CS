@@ -21,7 +21,7 @@ public class Waterfall extends SpawningGround {
     @Override
     public void tick(Location location) {
         super.tick(location);
-        if (Tools.chanceSimulation(20) && Tools.checkElementSurroundings(Element.WATER,location)) {
+        if (Tools.chanceSimulation(20) && Tools.checkGroundSurroundings(Element.WATER,location)) {
             this.addCapability(Spawn.SQUIRTLE);
         }
         if (Tools.chanceSimulation(20)) {

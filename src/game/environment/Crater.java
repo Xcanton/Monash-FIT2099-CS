@@ -23,7 +23,7 @@ public class Crater extends SpawningGround  {
     @Override
     public void tick(Location location) {
         super.tick(location);
-        if (Tools.chanceSimulation(10) && Tools.checkElementSurroundings(Element.FIRE,location)) {
+        if (Tools.chanceSimulation(10) && Tools.checkGroundSurroundings(Element.FIRE,location)) {
             this.addCapability(Spawn.CHARMANDER);
 
         }

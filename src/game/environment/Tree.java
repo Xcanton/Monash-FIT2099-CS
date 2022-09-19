@@ -32,7 +32,7 @@ public class Tree extends SpawningGround implements TimePerception {
     @Override
     public void tick(Location location) {
         super.tick(location);
-        if (Tools.chanceSimulation(15) && Tools.checkElementSurroundings(Element.GRASS,location)) {
+        if (Tools.chanceSimulation(15) && Tools.checkGroundSurroundings(Element.GRASS,location)) {
             this.addCapability(Spawn.BULBASAUR);
 
         }
