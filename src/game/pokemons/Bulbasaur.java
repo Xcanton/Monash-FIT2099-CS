@@ -7,14 +7,14 @@ import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.actions.DoNothingAction;
 import edu.monash.fit2099.engine.positions.GameMap;
+import edu.monash.fit2099.engine.positions.Location;
 import edu.monash.fit2099.engine.weapons.IntrinsicWeapon;
-import game.AttackAction;
-import game.Element;
-import game.Status;
+import game.*;
 import game.behaviours.AttackBehaviour;
 import game.behaviours.Behaviour;
 import game.behaviours.FollowBehaviour;
 import game.behaviours.WanderBehaviour;
+import game.items.VineWhip;
 import game.time.TimePerception;
 
 import java.util.HashMap;
@@ -26,10 +26,11 @@ import java.util.Map;
  * @author Chongjie Chen
  * Modified by:
  */
-public class Bulbasaur extends Actor implements TimePerception {
+public class Bulbasaur extends Actor implements TimePerception, Affection {
     //FIXME: Change it to a sorted map (is it TreeMap? HashMap? LinkedHashMap?)
     private final Map<Integer, Behaviour> behaviours = new HashMap<>(); // priority, behaviour
     private IntrinsicWeapon intrinsicWeapon;
+    private VineWhip vineWhip;
     /**
      * Constructor.
      */
@@ -38,10 +39,13 @@ public class Bulbasaur extends Actor implements TimePerception {
         // HINT: add more relevant behaviours here
         this.addCapability(Element.GRASS);
         this.addCapability(Status.CATCHABLE);
-        IntrinsicWeapon intrinsicWeapon= new IntrinsicWeapon(10,"tackles");
-        this.behaviours.put(2, new WanderBehaviour());
+        this.addCapability(Status.POKEMON);
         this.behaviours.put(1, new AttackBehaviour());
+        this.behaviours.put(2, new WanderBehaviour());
+        this.intrinsicWeapon=new IntrinsicWeapon(10,"tackles");
         this.registerInstance();
+        this.vineWhip=new VineWhip();
+        this.registerAffection();
     }
 
     /**
@@ -65,6 +69,10 @@ public class Bulbasaur extends Actor implements TimePerception {
      */
     @Override
     public Action playTurn(ActionList actions, Action lastAction, GameMap map, Display display) {
+        System.out.print("Bulbasaur"+printHp() + AffectionManager.getInstance().printAffection(this)+ " ");
+        if (AffectionManager.getInstance().getAffectionPoint(this)>75){
+            this.behaviours.put(3,new FollowBehaviour(map.at(Player.getPlayerX(),Player.getPlayerY()).getActor()));
+        }
         for (Behaviour behaviour : behaviours.values()) {
             Action action = behaviour.getAction(this, map);
             if (action != null)
@@ -77,6 +85,9 @@ public class Bulbasaur extends Actor implements TimePerception {
      * @param isEquipping FIXME: develop a logic to toggle weapon (put a selected weapon to the inventory - used!);
      */
     public void toggleWeapon(boolean isEquipping) {
+        if (isEquipping) {
+            this.addItemToInventory(vineWhip);
+        }
     }
 
 

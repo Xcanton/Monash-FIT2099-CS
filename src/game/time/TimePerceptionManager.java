@@ -23,7 +23,7 @@ public class TimePerceptionManager {
 
     private int turn=0;
 
-    private TimePeriod shift=TimePeriod.DAY; // DAY or NIGHT
+    private static TimePeriod shift=TimePeriod.DAY; // DAY or NIGHT
 
     /**
      * A singleton instance
@@ -59,20 +59,21 @@ public class TimePerceptionManager {
      */
     public void run() {
         switch(shift){
+
             case DAY:
+                System.out.format("It is Day-time (Turn %d)%n",turn);
                 for (TimePerception t: timePerceptionList)
                     t.dayEffect();
-                System.out.format("It is Day-time (Turn %d)%n",turn);
-                if (turn%4==0 & turn!=0) {
+                if ((turn+1)%5==0 & turn!=0) {
                     {shift=TimePeriod.NIGHT;}
                     break;
                 }
                 break;
             case NIGHT:
+                System.out.format("It is Night-time (Turn %d)%n",turn);
                 for (TimePerception t: timePerceptionList)
                     t.nightEffect();
-                System.out.format("It is Night-time (Turn %d)%n",turn);
-                if (turn%4==0& turn!=0)
+                if ((turn+1)%5==0& turn!=0)
                     {shift=TimePeriod.DAY;}
                     break;
 
@@ -98,6 +99,9 @@ public class TimePerceptionManager {
      * @param objInstance object instance
      */
     public void cleanUp(TimePerception objInstance) {
+    }
+    public static TimePeriod getTime(){
+        return shift;
     }
 
 }

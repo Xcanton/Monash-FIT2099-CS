@@ -11,5 +11,6 @@ public class Pokefruit extends Item {
     public Pokefruit(Element element) {
         super("Pokefruit",'f',true);
         this.element=element;
+        this.addCapability(element);
     }
 }

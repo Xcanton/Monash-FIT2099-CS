@@ -2,11 +2,10 @@ package game.environment;
 
 import edu.monash.fit2099.engine.items.DropItemAction;
 import edu.monash.fit2099.engine.positions.Location;
-import game.Element;
-import game.Spawn;
-import game.SpawnManager;
+import game.*;
 import game.items.Pokefruit;
-import game.Tools;
+import game.pokemons.Bulbasaur;
+import game.pokemons.Charmander;
 
 public class Crater extends SpawningGround  {
     private static SpawnManager spawnManager;
@@ -23,13 +22,18 @@ public class Crater extends SpawningGround  {
     @Override
     public void tick(Location location) {
         super.tick(location);
-        if (Tools.chanceSimulation(10) && Tools.checkGroundSurroundings(Element.FIRE,location)) {
-            this.addCapability(Spawn.CHARMANDER);
+        try {
+            if (Tools.chanceSimulation(10) && Tools.checkGroundSurroundings(Element.FIRE, location, 0)) {
+                Charmander charmander = new Charmander();
 
+                SpawnManager.spawnActor(location, charmander);
+            }
+            if (Tools.chanceSimulation(25)) {
+                Pokefruit pokefruit = new Pokefruit(Element.FIRE);
+                SpawnManager.spawnItem(location, pokefruit);
+            }
         }
-        if (Tools.chanceSimulation(25)) {
-            this.addCapability(Spawn.FIREFRUIT);
-        }
+        catch (IllegalArgumentException ignored){}
     }
 
 

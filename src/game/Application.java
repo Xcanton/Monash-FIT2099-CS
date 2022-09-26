@@ -8,6 +8,9 @@ import edu.monash.fit2099.engine.positions.FancyGroundFactory;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.World;
 import game.environment.*;
+import game.pokemons.Bulbasaur;
+import game.pokemons.Charmander;
+import game.pokemons.Squirtle;
 
 /**
  * The main class to start the game.
@@ -29,27 +32,38 @@ public class Application {
 
         List<String> map = Arrays.asList(
                 ".............................................^^^^^^^^^^^^^^",
-                "...........,T,................................,T,..^^^^O^^^",
+                "...........,,,................................,.,..^^^^O^^^",
                 ".....................................................^^^^^^",
                 "........................................................^^^",
                 "..........................#######...........,,...........^^",
-                "..........................#_____#...........,T............^",
-                "..,,,...............,T....#_____#..........................",
-                "..,T,......~..............###_###..........................",
+                "..........................#_____#...........,.............^",
+                "..,,,...............,.....#_____#..........................",
+                "..,.,......~..............###_###..........................",
                 "...~~~~~~~~................................................",
                 "....~~~~~..................................................",
-                "~~W~~~~.,............................,,,...................",
-                "~~~~~~.,T,...........................,T,...................",
+                "~~W~~~~.,.....................O....T.,,,...................",
+                "~~~~~~.,,,...........................,.,...................",
                 "~~~~~~~~~............................,.....................");
         GameMap gameMap = new GameMap(groundFactory, map);
         Tools tools= new Tools(gameMap);
-        world.addGameMap(gameMap);
 
         //Add player - Ash
         Player ash = new Player("Ash", '@', 1,gameMap);
+        world.addGameMap(gameMap);
         world.addPlayer(ash, gameMap.at(32, 10));
+        ash.setLocation(32,10);
         //Add first pokemon - Charmander
+        Charmander charmander= new Charmander();
+        gameMap.at(31,10).addActor(charmander);
+
+        Squirtle squirtle= new Squirtle();
+        gameMap.at(30,10).addActor(squirtle);
+
+        Bulbasaur bulbasaur= new Bulbasaur();
+        gameMap.at(30,11).addActor(bulbasaur);
         world.run();
+
+
 
     }
 }

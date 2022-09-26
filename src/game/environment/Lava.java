@@ -1,8 +1,10 @@
 package game.environment;
 
 import edu.monash.fit2099.engine.positions.Ground;
+import edu.monash.fit2099.engine.positions.Location;
 import game.Element;
-import game.time.TimePerception;
+import game.Tools;
+import game.time.TimePerceptionManager;
 
 /**
  * Created by:
@@ -10,7 +12,7 @@ import game.time.TimePerception;
  * Modified by:
  *
  */
-public class Lava extends Ground implements TimePerception {
+public class Lava extends Ground {
     /**
      * Constructor.
      */
@@ -20,12 +22,21 @@ public class Lava extends Ground implements TimePerception {
     }
 
     @Override
-    public void dayEffect() {
-
-    }
-
-    @Override
-    public void nightEffect() {
+    public void tick(Location location) {
+        super.tick(location);
+        switch (TimePerceptionManager.getTime()){
+            case DAY:
+                if (Tools.chanceSimulation(10)){
+                    Tools.expand(location,this);
+                }
+                break;
+            case NIGHT:
+                if (Tools.chanceSimulation(10)) {
+                if (!Tools.isActorAt(location)) {
+                    this.setDisplayChar('.');
+                }
+            }
+        }
 
     }
 }

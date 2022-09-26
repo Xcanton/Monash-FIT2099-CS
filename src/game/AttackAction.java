@@ -8,6 +8,12 @@ import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.items.Item;
 import edu.monash.fit2099.engine.weapons.Weapon;
+import game.items.Bubble;
+import game.items.Ember;
+import game.items.VineWhip;
+import game.pokemons.Bulbasaur;
+import game.pokemons.Charmander;
+import game.pokemons.Squirtle;
 
 /**
  * An Action to attack another Actor.
@@ -45,7 +51,30 @@ public class AttackAction extends Action {
 
     @Override
     public String execute(Actor actor, GameMap map) {
+        try {
+            switch (actor.findCapabilitiesByType(Element.class).get(0)) {
+                case FIRE:
+                    if (Tools.checkGround(actor, map.locationOf(actor))) {
+                        Ember ember = new Ember();
+                        actor.addItemToInventory(ember);
+                    }
+                    break;
 
+                case GRASS:
+                    if (Tools.checkGround(actor, map.locationOf(actor))) {
+                        VineWhip vineWhip = new VineWhip();
+                        actor.addItemToInventory(vineWhip);
+                    }
+                    break;
+
+                case WATER:
+                    if (Tools.checkGround(actor, map.locationOf(actor)) || target.hasCapability(Element.FIRE)) {
+                        Bubble bubble = new Bubble();
+                        actor.addItemToInventory(bubble);
+                    }
+                    break;
+            }
+        }catch (NullPointerException e){}
         Weapon weapon = actor.getWeapon();
 
         if (!(rand.nextInt(100) <= weapon.chanceToHit())) {
@@ -55,6 +84,13 @@ public class AttackAction extends Action {
         int damage = weapon.damage();
         String result = actor + " " + weapon.verb() + " " + target + " for " + damage + " damage.";
         target.hurt(damage);
+
+        if (actor.findCapabilitiesByType(Status.class).contains(Status.POKEMON))
+        {
+            int i;
+            for (i=0;i<actor.getInventory().size();i++)
+                actor.removeItemFromInventory(actor.getInventory().get(i));
+        }
         if (!target.isConscious()) {
             ActionList dropActions = new ActionList();
             // drop all items

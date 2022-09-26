@@ -8,11 +8,11 @@ import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.actions.DoNothingAction;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.weapons.IntrinsicWeapon;
-import game.AttackAction;
-import game.Element;
+import game.*;
 import game.behaviours.AttackBehaviour;
 import game.behaviours.Behaviour;
-import game.behaviours.WanderBehaviour;
+import game.behaviours.FollowBehaviour;
+import game.items.Ember;
 import game.time.TimePerception;
 
 import java.util.HashMap;
@@ -24,22 +24,24 @@ import java.util.Map;
  * @author Riordan D. Alfredo
  * Modified by: Chongjie Chen
  */
-public class Charmander extends Actor implements TimePerception {
+public class Charmander extends Actor implements TimePerception, Affection {
     //FIXME: Change it to a sorted map (is it TreeMap? HashMap? LinkedHashMap?)
     private final Map<Integer, Behaviour> behaviours = new HashMap<>(); // priority, behaviour
     private IntrinsicWeapon intrinsicWeapon;
+    private Ember ember;
     /**
      * Constructor.
      */
     public Charmander() {
         super("Charmander", 'c', 100);
         // HINT: add more relevant behaviours here
-        IntrinsicWeapon intrinsicWeapon= new IntrinsicWeapon(10,"scratches");
         this.addCapability(Element.FIRE);
-        this.behaviours.put(2, new WanderBehaviour());
+        this.addCapability(Status.POKEMON);
         this.behaviours.put(1, new AttackBehaviour());
+        this.intrinsicWeapon=new IntrinsicWeapon(10,"scratches");
+        this.ember= new Ember();
         this.registerInstance();
-
+        this.registerAffection();
     }
 
     /**
@@ -63,6 +65,10 @@ public class Charmander extends Actor implements TimePerception {
      */
     @Override
     public Action playTurn(ActionList actions, Action lastAction, GameMap map, Display display) {
+        System.out.print("Charmander"+printHp() + AffectionManager.getInstance().printAffection(this)+" ");
+        if (AffectionManager.getInstance().getAffectionPoint(this)>75){
+            this.behaviours.put(3,new FollowBehaviour(map.at(Player.getPlayerX(),Player.getPlayerY()).getActor()));
+        }
         for (Behaviour behaviour : behaviours.values()) {
             Action action = behaviour.getAction(this, map);
             if (action != null)
@@ -75,21 +81,22 @@ public class Charmander extends Actor implements TimePerception {
      * @param isEquipping FIXME: develop a logic to toggle weapon (put a selected weapon to the inventory - used!);
      */
     public void toggleWeapon(boolean isEquipping) {
+        if (isEquipping){
+        this.addItemToInventory(ember);}
     }
 
     @Override
     public void dayEffect() {
         heal(10);
-        System.out.println(printHp());
     }
 
     @Override
     public void nightEffect() {
         hurt(10);
-        System.out.println(printHp());
     }
     @Override
     public IntrinsicWeapon getIntrinsicWeapon() {
         return intrinsicWeapon;
     }
+
 }

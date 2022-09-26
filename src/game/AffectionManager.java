@@ -1,6 +1,7 @@
 package game;
 
 import edu.monash.fit2099.engine.actors.Actor;
+import game.time.TimePerception;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -22,7 +23,7 @@ public class AffectionManager {
     /**
      * HINT: is it just for a Charmander?
      */
-    private final Map<Actor, Integer> affectionPoints;
+    private final Map<Affection, Integer> affectionPoints;
 
     /**
      * We assume there's only one trainer in this manager.
@@ -63,7 +64,8 @@ public class AffectionManager {
      *
      * @param pokemon
      */
-    public void registerPokemon(Actor pokemon) {
+    public void registerPokemon(Affection objInstance) {
+        affectionPoints.put(objInstance,0);
     }
 
     /**
@@ -72,8 +74,8 @@ public class AffectionManager {
      * @param pokemon Pokemon instance
      * @return integer of affection point.
      */
-    public int getAffectionPoint(Actor pokemon) {
-        return affectionPoints.get(pokemon);
+    public int getAffectionPoint(Affection objInstance) {
+        return affectionPoints.get(objInstance);
     }
 
     /**
@@ -82,8 +84,8 @@ public class AffectionManager {
      * @param actor general actor instance
      * @return the Pokemon instance.
      */
-    private Actor findPokemon(Actor actor) {
-        for (Actor pokemon : affectionPoints.keySet()) {
+    public Affection findPokemon(Actor actor) {
+        for (Affection pokemon : affectionPoints.keySet()) {
             if (pokemon.equals(actor)) {
                 return pokemon;
             }
@@ -99,8 +101,16 @@ public class AffectionManager {
      * @param point positive affection modifier
      * @return custom message to be printed by Display instance later.
      */
-    public String increaseAffection(Actor actor, int point) {
-        return "";
+    public void increaseAffection(Affection objInstance, int point) {
+        int affection=affectionPoints.get(objInstance);
+        if (affection+point>100) {
+            int difference= 100-affection;
+            affectionPoints.put(objInstance, 100);
+            System.out.println(objInstance + " likes it! +" + difference + " affection points");
+        } else{
+            affectionPoints.put(objInstance,affection+point);
+            System.out.println(objInstance+" likes it! +" + point +" affection points");
+        }
     }
 
     /**
@@ -110,8 +120,18 @@ public class AffectionManager {
      * @param point positive affection modifier (to be subtracted later)
      * @return custom message to be printed by Display instance later.
      */
-    public String decreaseAffection(Actor actor, int point) {
-        return "";
+    public void decreaseAffection(Affection objInstance, int point) {
+        int affection = affectionPoints.get(objInstance);
+        if (affection - point < (-50)) {
+            int difference = -50 + affection;
+            affectionPoints.put(objInstance, -50);
+            System.out.println(objInstance + " dislikes it! -" + difference + " affection points");
+        } else {
+            affectionPoints.put(objInstance, affection - point);
+            System.out.println(objInstance + " dislikes it! -" + point + " affection points");
+        }
     }
-
+    public String printAffection(Affection objInstance){
+        return ("(AP: "+this.getAffectionPoint(objInstance))+")";
+    }
 }
