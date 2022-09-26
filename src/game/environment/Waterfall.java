@@ -1,13 +1,10 @@
 package game.environment;
 
-import edu.monash.fit2099.engine.items.DropItemAction;
 import edu.monash.fit2099.engine.positions.Location;
-import game.Element;
-import game.Spawn;
-import game.SpawnManager;
+import game.utils.Element;
+import game.utils.SpawnManager;
 import game.items.Pokefruit;
-import game.Tools;
-import game.pokemons.Charmander;
+import game.utils.Tools;
 import game.pokemons.Squirtle;
 
 public class Waterfall extends SpawningGround {

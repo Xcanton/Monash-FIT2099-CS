@@ -8,12 +8,13 @@ import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.actions.DoNothingAction;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.weapons.IntrinsicWeapon;
-import game.*;
+import game.behaviours.AttackAction;
 import game.behaviours.AttackBehaviour;
 import game.behaviours.Behaviour;
 import game.behaviours.FollowBehaviour;
 import game.items.Ember;
 import game.time.TimePerception;
+import game.utils.*;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -25,7 +26,6 @@ import java.util.Map;
  * Modified by: Chongjie Chen
  */
 public class Charmander extends Actor implements TimePerception, Affection {
-    //FIXME: Change it to a sorted map (is it TreeMap? HashMap? LinkedHashMap?)
     private final Map<Integer, Behaviour> behaviours = new HashMap<>(); // priority, behaviour
     private IntrinsicWeapon intrinsicWeapon;
     private Ember ember;
@@ -54,7 +54,6 @@ public class Charmander extends Actor implements TimePerception, Affection {
     public ActionList allowableActions(Actor otherActor, String direction, GameMap map) {
         ActionList actions = new ActionList();
         actions.add(new AttackAction(this, direction));
-        //FIXME: allow other actor to attack this Charmander (incl. Player). Please check requirement! :)
         return actions;
     }
 
@@ -77,13 +76,6 @@ public class Charmander extends Actor implements TimePerception, Affection {
         return new DoNothingAction();
     }
 
-    /**
-     * @param isEquipping FIXME: develop a logic to toggle weapon (put a selected weapon to the inventory - used!);
-     */
-    public void toggleWeapon(boolean isEquipping) {
-        if (isEquipping){
-        this.addItemToInventory(ember);}
-    }
 
     @Override
     public void dayEffect() {

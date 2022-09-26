@@ -8,24 +8,18 @@ package game.time;
  */
 public interface TimePerception {
     /**
-     * TODO: override this method, and execute this method inside the relevant manager.
+     * Night effect which is run every night turn
      */
     void dayEffect();
 
     /**
-     * TODO: override this method, and execute this method inside the relevant manager.
+     * Day effect that is ran every day turn
      */
     void nightEffect();
 
     /**
      * a default interface method that register current instance to the Singleton manager.
      * It allows corresponding class uses to be affected by global reset
-     * TODO: Use this method at the constructor of the concrete class that implements it (`this` instance).
-     *       For example:
-     *       Simple(){
-     *          // other stuff for constructors.
-     *          this.registerInstance()  // add this instance to the relevant manager.
-     *       }
      */
     default void registerInstance(){
         TimePerceptionManager.getInstance().append(this);

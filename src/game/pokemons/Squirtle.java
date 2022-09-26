@@ -8,14 +8,10 @@ import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.actions.DoNothingAction;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.weapons.IntrinsicWeapon;
-import edu.monash.fit2099.engine.weapons.Weapon;
-import game.*;
-import game.behaviours.AttackBehaviour;
-import game.behaviours.Behaviour;
-import game.behaviours.FollowBehaviour;
-import game.behaviours.WanderBehaviour;
+import game.behaviours.*;
 import game.items.Bubble;
 import game.time.TimePerception;
+import game.utils.*;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -27,7 +23,6 @@ import java.util.Map;
  * Modified by:
  */
 public class Squirtle extends Actor implements TimePerception, Affection {
-    //FIXME: Change it to a sorted map (is it TreeMap? HashMap? LinkedHashMap?)
     private final Map<Integer, Behaviour> behaviours = new HashMap<>(); // priority, behaviour
     private IntrinsicWeapon intrinsicWeapon;
     private Bubble bubble;
@@ -81,14 +76,6 @@ public class Squirtle extends Actor implements TimePerception, Affection {
         return new DoNothingAction();
     }
 
-    /**
-     * @param isEquipping FIXME: develop a logic to toggle weapon (put a selected weapon to the inventory - used!);
-     */
-    public void toggleWeapon(boolean isEquipping) {
-        if (isEquipping){
-            this.addItemToInventory(bubble);
-        }
-    }
 
     @Override
     public void dayEffect() {

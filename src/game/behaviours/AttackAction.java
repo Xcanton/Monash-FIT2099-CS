@@ -1,4 +1,4 @@
-package game;
+package game.behaviours;
 
 import java.util.Random;
 
@@ -8,19 +8,18 @@ import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.items.Item;
 import edu.monash.fit2099.engine.weapons.Weapon;
+import game.utils.Element;
+import game.utils.Status;
+import game.utils.Tools;
 import game.items.Bubble;
 import game.items.Ember;
 import game.items.VineWhip;
-import game.pokemons.Bulbasaur;
-import game.pokemons.Charmander;
-import game.pokemons.Squirtle;
 
 /**
  * An Action to attack another Actor.
- * Created by:
+ * <p>
  *
- * @author Riordan D. Alfredo
- * Modified by:
+ * @author Chongjie Chen
  */
 public class AttackAction extends Action {
 
@@ -49,6 +48,13 @@ public class AttackAction extends Action {
         this.direction = direction;
     }
 
+    /**
+     * Perform the action. Check the capabilities and equip weapon if given the right conditions.
+     * If conditions are not met, it will equip the intrinsic attack of the pokemon. After attack it will check if the other pokemon is still concious and if not, it will drop all of it's items
+     * @param actor The actor performing the action.
+     * @param map The map the actor is on.
+     * @return
+     */
     @Override
     public String execute(Actor actor, GameMap map) {
         try {

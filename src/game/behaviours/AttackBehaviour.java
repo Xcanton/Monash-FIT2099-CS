@@ -3,9 +3,8 @@ package game.behaviours;
 import edu.monash.fit2099.engine.actions.Action;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.positions.GameMap;
-import game.*;
-import game.pokemons.Bulbasaur;
-import game.pokemons.Charmander;
+import game.utils.Status;
+import game.utils.Tools;
 
 /**
  * Created by:
@@ -16,7 +15,10 @@ import game.pokemons.Charmander;
 public class AttackBehaviour implements Behaviour {
 
     /**
-     *  HINT: develop a logic to check surrounding, check elements, and return an action to attack that opponent.
+     * Check if the opponent has the immune capability and will attack if they don't have immunity
+     * @param actor the Actor acting
+     * @param map the GameMap containing the Actor
+     * @return
      */
     @Override
     public Action getAction(Actor actor, GameMap map) {

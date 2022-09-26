@@ -1,12 +1,17 @@
 package game.environment;
 
-import edu.monash.fit2099.engine.items.DropItemAction;
 import edu.monash.fit2099.engine.positions.Location;
-import game.*;
 import game.items.Pokefruit;
-import game.pokemons.Bulbasaur;
 import game.pokemons.Charmander;
-
+import game.utils.Element;
+import game.utils.SpawnManager;
+import game.utils.Tools;
+/**
+ * Crater
+ * <p>
+ * Class that represents a crater
+ * @author Chongjie Chen
+ */
 public class Crater extends SpawningGround  {
     private static SpawnManager spawnManager;
     /**
@@ -18,7 +23,10 @@ public class Crater extends SpawningGround  {
         this.addCapability(Element.FIRE);
     }
 
-
+    /**
+     * Overide method to check the ground and spawn a new pokemon
+     * @param location The location of the Ground
+     */
     @Override
     public void tick(Location location) {
         super.tick(location);

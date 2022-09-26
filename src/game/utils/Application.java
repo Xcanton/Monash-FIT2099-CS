@@ -1,4 +1,4 @@
-package game;
+package game.utils;
 
 import java.util.Arrays;
 import java.util.List;
@@ -14,7 +14,7 @@ import game.pokemons.Squirtle;
 
 /**
  * The main class to start the game.
- * Created by:
+ * Created by: Chongjie Chen
  *
  * @author Riordan D. Alfredo
  * Modified by:

@@ -1,7 +1,7 @@
 package game.items;
 
 import edu.monash.fit2099.engine.items.Item;
-import game.Element;
+import game.utils.Element;
 
 public class Pokefruit extends Item {
     Element element;

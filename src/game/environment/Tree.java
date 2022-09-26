@@ -1,18 +1,13 @@
 package game.environment;
 
-import edu.monash.fit2099.engine.items.DropItemAction;
 import edu.monash.fit2099.engine.positions.Location;
-import game.Element;
-import game.Spawn;
-import game.SpawnManager;
+import game.utils.Element;
+import game.utils.SpawnManager;
 import game.items.Candy;
 import game.items.Pokefruit;
 import game.pokemons.Bulbasaur;
-import game.time.TimePerception;
-import game.Tools;
+import game.utils.Tools;
 import game.time.TimePerceptionManager;
-
-import java.util.ArrayList;
 
 public class Tree extends SpawningGround  {
 

@@ -55,7 +55,6 @@ public class TimePerceptionManager {
      * Traversing through all instances in the list and execute them
      * By doing this way, it will avoid using `instanceof` all over the place.
      *
-     * FIXME: write a relevant logic (i.e., increment turns choose day or night) and call this method once at every turn.
      */
     public void run() {
         switch(shift){

@@ -13,9 +13,7 @@ Link to contribution logs spreadsheet: https://docs.google.com/spreadsheets/d/11
 _Please write your design rationale below (along with UML diagram pictures)..._
 
 REQ1:
-Lava will extend the **Ground** Class since it possesses characteristics of a Ground. This includes the ability for action to move onto it. We can also make use and override the tick() method of the Ground class to implement the damage inflicted to the actor on the Lava.
-- Follows DRY principle by extending from Ground. Makes use of pre-existing code within Ground which allows extension without modification which follows open-closed principles
-  we have a element abstract that is parent for all terrain with elements and extend to the interface elemnentGround.
+All spawning grounds will extend the abstract class spawning ground which follows the DRY principle and allows the system to be modified in the future without changing existing code which follows the open-closed principle
 
 REQ2:
 This diagram represents an object oriented system which represents a rougelike game. It makes sense that the classes Charmander, Squirtle and Bulbasaur inherit the abstract class actor as they share similar attributes and so should be inherited. Furthermore, they will use enumeration to represent their individual typings. To simulate their intrinsic and special attacks, the class Intrinsic Weapon will simulate their instrinsic attacks while their special attacks may be simulated by the class WeaponItem.  

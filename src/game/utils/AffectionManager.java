@@ -1,7 +1,6 @@
-package game;
+package game.utils;
 
 import edu.monash.fit2099.engine.actors.Actor;
-import game.time.TimePerception;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -21,7 +20,7 @@ public class AffectionManager {
      */
     private static AffectionManager instance;
     /**
-     * HINT: is it just for a Charmander?
+     * Hash map which maps the actors and affection
      */
     private final Map<Affection, Integer> affectionPoints;
 
@@ -62,7 +61,7 @@ public class AffectionManager {
     /**
      * Add Pokemon to the collection. By default, it has 0 affection point. Ideally, you'll register all instantiated Pokemon
      *
-     * @param pokemon
+     * @param objInstance the actor which implements affection
      */
     public void registerPokemon(Affection objInstance) {
         affectionPoints.put(objInstance,0);
@@ -71,7 +70,7 @@ public class AffectionManager {
     /**
      * Get the affection point by using the pokemon instance as the key.
      *
-     * @param pokemon Pokemon instance
+     * @param objInstance Pokemon instance that experiences affection
      * @return integer of affection point.
      */
     public int getAffectionPoint(Affection objInstance) {
@@ -97,7 +96,7 @@ public class AffectionManager {
      * Increase the affection. Work on both cases when there's a Pokemon,
      * or when it doesn't exist in the collection.
      *
-     * @param actor Actor instance, but we expect a Pokemon here.
+     * @param objInstance Actor instance, but we expect a Pokemon here.
      * @param point positive affection modifier
      * @return custom message to be printed by Display instance later.
      */
@@ -116,7 +115,7 @@ public class AffectionManager {
     /**
      * Decrease the affection level of the . Work on both cases when it is
      *
-     * @param actor Actor instance, but we expect a Pokemon here.
+     * @param objInstance Actor instance, but we expect a Pokemon here.
      * @param point positive affection modifier (to be subtracted later)
      * @return custom message to be printed by Display instance later.
      */
@@ -131,6 +130,12 @@ public class AffectionManager {
             System.out.println(objInstance + " dislikes it! -" + point + " affection points");
         }
     }
+
+    /**
+     * A method which is called upon to print the string
+     * @param objInstance
+     * @return
+     */
     public String printAffection(Affection objInstance){
         return ("(AP: "+this.getAffectionPoint(objInstance))+")";
     }

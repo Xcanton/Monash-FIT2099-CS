@@ -1,8 +1,13 @@
 package game.environment;
 
 import edu.monash.fit2099.engine.positions.Ground;
-import game.Element;
-import game.time.TimePerceptionManager;
+import game.utils.Element;
+/**
+ * Hay
+ * <p>
+ *
+ * @author Chongjie Chen
+ */
 
 public class Hay extends Ground {
     /**

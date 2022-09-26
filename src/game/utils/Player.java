@@ -1,22 +1,18 @@
-package game;
+package game.utils;
 
 import edu.monash.fit2099.engine.actions.Action;
 import edu.monash.fit2099.engine.actions.ActionList;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.displays.Display;
-import edu.monash.fit2099.engine.items.Item;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.displays.Menu;
 import edu.monash.fit2099.engine.positions.Location;
-import game.environment.Tree;
+import game.action.Catch;
+import game.action.FeedPokefruit;
+import game.action.PickUp;
+import game.action.ReturnPokemon;
 import game.items.Pokeball;
-import game.pokemons.Bulbasaur;
-import game.pokemons.Charmander;
-import game.pokemons.Squirtle;
 import game.time.TimePerceptionManager;
-
-import java.util.HashMap;
-import java.util.Map;
 
 /**
  * Class representing the Player.
@@ -52,6 +48,15 @@ public class Player extends Actor {
 		affectionManager.registerTrainer(this);
 	}
 
+	/**
+	 * Play turn is called every turn and checks to see the possible actions an actor can take.
+	 * Try catch loops check to see if conditions are met. If conditions are met, then a new action corresponding to that action will become selectable on the IO
+	 * @param actions    collection of possible Actions for this Actor
+	 * @param lastAction The Action this Actor took last turn. Can do interesting things in conjunction with Action.getNextAction()
+	 * @param map        the map containing the Actor
+	 * @param display    the I/O object to which messages may be written
+	 * @return
+	 */
 	@Override
 	public Action playTurn(ActionList actions, Action lastAction, GameMap map, Display display) {
 		timePerceptionManager.run();
@@ -227,22 +232,51 @@ public class Player extends Actor {
 		return super.getDisplayChar();
 	}
 
+	/**
+	 * register the pokemon in a pokeball
+	 * @param pokeball
+	 */
 	public static void registerPokemon(Pokeball pokeball){
 		caughtPokemon=pokeball.getActor();
 	}
+
+	/**
+	 * remove pokemonfrom the pokeball
+	 */
 	public static void removePokemon(){
 		caughtPokemon=null;
 	}
+
+	/**
+	 * Get the pokemon instance inside the pokeball
+	 * @return
+	 */
 	public static Actor getPokemon(){
 		return Player.caughtPokemon;
 	}
+
+	/**
+	 * Set the players location
+	 * @param x the x coordinate of the player
+	 * @param y the y coordinate of the player
+	 */
 	public void setLocation(int x, int y){
 		xLocation=x;
 		yLocation=y;
 	}
+
+	/**
+	 * Get the player's x coordinate
+	 * @return
+	 */
 	public static int getPlayerX(){
 		return xLocation;
 	}
+
+	/**
+	 * get the player's y coordinate
+	 * @return
+	 */
 	public static int getPlayerY(){
 		return yLocation;
 	}

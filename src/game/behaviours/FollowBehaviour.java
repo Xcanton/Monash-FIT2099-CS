@@ -13,8 +13,7 @@ import edu.monash.fit2099.engine.actions.MoveActorAction;
  * @see edu.monash.fit2099.demo.mars.Application
  *
  * Created by:
- * @author Riordan D. Alfredo
- * Modified by:
+ * @author Chongjie Chen
  *
  */
 public class FollowBehaviour implements Behaviour {

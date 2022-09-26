@@ -2,12 +2,9 @@ package game.environment;
 
 import edu.monash.fit2099.engine.positions.Ground;
 import edu.monash.fit2099.engine.positions.Location;
-import game.Element;
-import game.Tools;
+import game.utils.Element;
+import game.utils.Tools;
 import game.time.TimePerceptionManager;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class Puddle extends Ground  {
     /**

@@ -1,9 +1,15 @@
-package game;
+package game.action;
 
 import edu.monash.fit2099.engine.actions.Action;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.positions.GameMap;
-
+import game.utils.Player;
+/**
+ * ReturnPokemon
+ * <p>
+ * The class is used to return pokemon from pokeball to surroundings
+ * @author Chongjie Chen
+ */
 public class ReturnPokemon extends Action {
     Actor pokemon;
     int xLocation;
@@ -14,6 +20,7 @@ public class ReturnPokemon extends Action {
         this.yLocation=y;
         this.pokemon=pokemon;
     }
+
     @Override
     public String execute(Actor actor, GameMap map) {
         Player.removePokemon();
