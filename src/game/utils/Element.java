@@ -3,7 +3,11 @@ package game.utils;
 public enum Element {
     WATER("Water"),
     FIRE("Fire"),
-    GRASS("Grass");
+    GRASS("Grass"),
+
+    // REQ1: Evolution
+    // Dragon-type
+    DRAGON("Dragon");
 
     private final String label;
 
