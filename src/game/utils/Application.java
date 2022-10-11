@@ -9,6 +9,7 @@ import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.World;
 import game.environment.*;
 import game.pokemons.Bulbasaur;
+import game.pokemons.Charizard;
 import game.pokemons.Charmander;
 import game.pokemons.Squirtle;
 
@@ -61,6 +62,11 @@ public class Application {
 
         Bulbasaur bulbasaur= new Bulbasaur();
         gameMap.at(30,11).addActor(bulbasaur);
+
+        // Test
+        Charizard test = new Charizard();
+        gameMap.at(32,9).addActor(test);
+
         world.run();
 
 

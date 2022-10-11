@@ -77,7 +77,7 @@ public class Charmeleon extends Actor implements TimePerception, Affection {
      */
     @Override
     public Action playTurn(ActionList actions, Action lastAction, GameMap map, Display display) {
-        System.out.print("Charmander"+printHp() + AffectionManager.getInstance().printAffection(this)+" ");
+        System.out.print("Charmeleon"+printHp() + AffectionManager.getInstance().printAffection(this)+" ");
         if (AffectionManager.getInstance().getAffectionPoint(this)>75){
             this.behaviours.put(3,new FollowBehaviour(map.at(Player.getPlayerX(),Player.getPlayerY()).getActor()));
         }

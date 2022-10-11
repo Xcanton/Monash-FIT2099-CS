@@ -1,6 +1,8 @@
 package edu.monash.fit2099.engine.weapons;
 
+import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.items.Item;
+import edu.monash.fit2099.engine.positions.Location;
 
 /**
  * Class representing items that can be used as a weapon.
@@ -52,4 +54,11 @@ public abstract class WeaponItem extends Item implements Weapon {
 	 */
 	public int chanceToHit(){return hitRate;}
 
+	@Override
+	public void tick(Location currentLocation, Actor actor) {
+	}
+
+	@Override
+	public void tick(Location currentLocation) {
+	}
 }
