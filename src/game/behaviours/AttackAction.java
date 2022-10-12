@@ -80,7 +80,7 @@ public class AttackAction extends Action {
                     }
                     break;
             }
-        }catch (NullPointerException e){}
+        }catch (NullPointerException | IndexOutOfBoundsException ignored){}
         Weapon weapon = actor.getWeapon();
 
         if (!(rand.nextInt(100) <= weapon.chanceToHit())) {

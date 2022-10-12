@@ -25,7 +25,7 @@ import java.util.Map;
  * @author Riordan D. Alfredo
  * Modified by: Chongjie Chen
  */
-public class Charmander extends Actor implements TimePerception, Affection {
+public class Charmander extends EvolvableActor implements TimePerception, Affection {
     private final Map<Integer, Behaviour> behaviours = new HashMap<>(); // priority, behaviour
     private IntrinsicWeapon intrinsicWeapon;
     private Ember ember;
@@ -33,13 +33,14 @@ public class Charmander extends Actor implements TimePerception, Affection {
      * Constructor.
      */
     public Charmander() {
-        super("Charmander", 'c', 100);
+        super("Charmander", 'c', 100, new Charmeleon(), 20);
         // HINT: add more relevant behaviours here
         this.addCapability(Element.FIRE);
         this.addCapability(Status.POKEMON);
         this.behaviours.put(1, new AttackBehaviour());
         this.intrinsicWeapon=new IntrinsicWeapon(10,"scratches");
         this.ember= new Ember();
+        this.addItemToInventory(this.ember);
         this.registerInstance();
         this.registerAffection();
     }
@@ -64,6 +65,10 @@ public class Charmander extends Actor implements TimePerception, Affection {
      */
     @Override
     public Action playTurn(ActionList actions, Action lastAction, GameMap map, Display display) {
+
+        durationBeforeEvolution--;
+        Evolve(map);
+
         System.out.print("Charmander"+printHp() + AffectionManager.getInstance().printAffection(this)+" ");
         if (AffectionManager.getInstance().getAffectionPoint(this)>75){
             this.behaviours.put(3,new FollowBehaviour(map.at(Player.getPlayerX(),Player.getPlayerY()).getActor()));

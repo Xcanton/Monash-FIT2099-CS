@@ -4,6 +4,7 @@ import edu.monash.fit2099.engine.actions.Action;
 import edu.monash.fit2099.engine.actions.ActionList;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.displays.Display;
+import edu.monash.fit2099.engine.items.Item;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.displays.Menu;
 import edu.monash.fit2099.engine.positions.Location;
@@ -13,6 +14,9 @@ import game.action.PickUp;
 import game.action.ReturnPokemon;
 import game.items.Pokeball;
 import game.time.TimePerceptionManager;
+
+import java.util.List;
+import java.util.Objects;
 
 /**
  * Class representing the Player.
@@ -61,9 +65,20 @@ public class Player extends Actor {
 	public Action playTurn(ActionList actions, Action lastAction, GameMap map, Display display) {
 		timePerceptionManager.run();
 		Location location=map.locationOf(this);
-		if (map.at(location.x(),location.y()).getItems().size()!=0)
+
+
+
+		List<Item> items = map.at(location.x(),location.y()).getItems();
+		if (items.size()!=0)
 		{
-			actions.add(new PickUp());
+			boolean allow = true;
+			for (Item item : items){
+				if (Objects.isNull(item.getPickUpAction(this))){
+					allow = false;
+					break;
+				}
+			}
+			if (allow) { actions.add(new PickUp()); }
 		}
 		boolean returnPokemon= Player.getPokemon() != null;
 

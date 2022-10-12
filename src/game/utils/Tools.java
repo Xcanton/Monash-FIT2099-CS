@@ -3,6 +3,7 @@ import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.Ground;
 import edu.monash.fit2099.engine.positions.Location;
+import game.items.Fire;
 
 import java.util.*;
 
@@ -175,6 +176,33 @@ public class Tools {
 
         }
         return null;
+    }
+
+    public static boolean checkOtherActorSurround(Actor actor) {
+        for (Location loca : Surrounding(gameMap.locationOf(actor))) {
+            try {
+                if (Objects.nonNull(gameMap.getActorAt(loca))) { return true; }
+            } catch (ArrayIndexOutOfBoundsException ignore) {}
+        }
+        return false;
+    }
+
+    public static List<Location> Surrounding(Location currentLocation) {
+
+        int x = currentLocation.x();
+        int y = currentLocation.y();
+
+        List<Location> functionLocation = new ArrayList<>();
+        functionLocation.add(new Location(currentLocation.map(), x-1, y));
+        functionLocation.add(new Location(currentLocation.map(), x-1, y-1));
+        functionLocation.add(new Location(currentLocation.map(), x, y-1));
+        functionLocation.add(new Location(currentLocation.map(), x+1, y-1));
+        functionLocation.add(new Location(currentLocation.map(), x+1, y));
+        functionLocation.add(new Location(currentLocation.map(), x+1, y+1));
+        functionLocation.add(new Location(currentLocation.map(), x, y+1));
+        functionLocation.add(new Location(currentLocation.map(), x-1, y+1));
+
+        return functionLocation;
     }
 
     /**

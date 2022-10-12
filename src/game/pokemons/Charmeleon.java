@@ -26,7 +26,7 @@ import java.util.Map;
  * @author Chongjie Chen
  * Modified by: Chongjie Chen
  */
-public class Charmeleon extends Actor implements TimePerception, Affection {
+public class Charmeleon extends EvolvableActor implements TimePerception, Affection {
     private final Map<Integer, Behaviour> behaviours = new HashMap<>(); // priority, behaviour
     private IntrinsicWeapon intrinsicWeapon;
     private Ember ember;
@@ -37,7 +37,7 @@ public class Charmeleon extends Actor implements TimePerception, Affection {
     public Charmeleon() {
         // REQ1: Evolution
         // Charmeleon C (capital C) has a maximum of 150 HP
-        super("Charmeleon", 'C', 150);
+        super("Charmeleon", 'C', 150, new Charizard(), 20);
         // REQ1: Evolution
         // HINT: add more relevant behaviours here
         // Fire-Type
@@ -50,9 +50,11 @@ public class Charmeleon extends Actor implements TimePerception, Affection {
         // REQ1: Evolution
         // Ember: refer to Assignment 1 & 2 requirements
         this.ember= new Ember();
+        this.addItemToInventory(this.ember);
         // REQ1: Evolution
         // Blaze (60 damage/90 hit rate): a fire-element weapon item.
         this.blaze= new Blaze();
+        this.addItemToInventory(this.blaze);
         this.registerInstance();
         this.registerAffection();
     }
@@ -77,7 +79,11 @@ public class Charmeleon extends Actor implements TimePerception, Affection {
      */
     @Override
     public Action playTurn(ActionList actions, Action lastAction, GameMap map, Display display) {
-        System.out.print("Charmander"+printHp() + AffectionManager.getInstance().printAffection(this)+" ");
+
+        durationBeforeEvolution--;
+        Evolve(map);
+
+        System.out.print("Charmeleon"+printHp() + AffectionManager.getInstance().printAffection(this)+" ");
         if (AffectionManager.getInstance().getAffectionPoint(this)>75){
             this.behaviours.put(3,new FollowBehaviour(map.at(Player.getPlayerX(),Player.getPlayerY()).getActor()));
         }

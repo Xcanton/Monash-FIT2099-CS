@@ -40,6 +40,7 @@ public class Bulbasaur extends Actor implements TimePerception, Affection {
         this.intrinsicWeapon=new IntrinsicWeapon(10,"tackles");
         this.registerInstance();
         this.vineWhip=new VineWhip();
+        this.addItemToInventory(this.vineWhip);
         this.registerAffection();
     }
 

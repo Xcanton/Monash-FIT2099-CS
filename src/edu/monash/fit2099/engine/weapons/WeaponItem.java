@@ -1,6 +1,8 @@
 package edu.monash.fit2099.engine.weapons;
 
+import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.items.Item;
+import edu.monash.fit2099.engine.positions.Location;
 
 /**
  * Class representing items that can be used as a weapon.
