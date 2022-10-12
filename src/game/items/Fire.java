@@ -1,9 +1,13 @@
 package game.items;
 
+import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.positions.Location;
 import edu.monash.fit2099.engine.weapons.WeaponItem;
 import game.action.gotburnt;
+import game.utils.AffectionManager;
 import game.utils.Element;
+
+import java.util.Objects;
 
 /**
  * Created by:
@@ -24,8 +28,6 @@ public class Fire extends WeaponItem {
     private int existTicksCount = 2;
     public Fire(){
         super("Fire", 'v', 10, "burns", 100);
-        // Fire burnt function register
-        this.addAction(new gotburnt(10));
     }
 
     @Override
@@ -35,6 +37,15 @@ public class Fire extends WeaponItem {
         // Vanish
         if(this.existTicksCount < 0) {
             currentLocation.removeItem(this);
+        } else {
+            Actor currentActor = currentLocation.getActor();
+            try {
+                Objects.requireNonNull(currentActor);
+                System.out.println( currentActor.toString() + " got burnt for 10 damage. ");
+                currentActor.hurt(10);
+            } catch (NullPointerException ignored) {
+
+            }
         }
     }
 }

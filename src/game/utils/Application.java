@@ -63,10 +63,6 @@ public class Application {
         Bulbasaur bulbasaur= new Bulbasaur();
         gameMap.at(30,11).addActor(bulbasaur);
 
-        // Test
-        Charizard test = new Charizard();
-        gameMap.at(32,9).addActor(test);
-
         world.run();
 
 

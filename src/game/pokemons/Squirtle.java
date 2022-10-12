@@ -40,6 +40,7 @@ public class Squirtle extends Actor implements TimePerception, Affection {
         this.intrinsicWeapon=new IntrinsicWeapon(10,"tackles");
         this.registerInstance();
         this.bubble=new Bubble();
+        this.addItemToInventory(this.bubble);
         this.registerAffection();
     }
 

@@ -7,6 +7,9 @@ import edu.monash.fit2099.engine.positions.GameMap;
 import game.utils.Affection;
 import game.utils.AffectionManager;
 import game.utils.Element;
+
+import java.util.List;
+
 /**
  * FeedPokefruit
  * <p>
@@ -36,12 +39,18 @@ public class FeedPokefruit extends Action {
     @Override
     public String execute(Actor actor, GameMap map) {
         instance= AffectionManager.getInstance().findPokemon(target);
-        Element itemElement=this.item.findCapabilitiesByType(Element.class).get(0);
-        System.out.println("Ash gives a " + itemElement+" Pokefruit" +" to " +target+""+AffectionManager.getInstance().printAffection(instance));
-        if(target.findCapabilitiesByType(Element.class).get(0)==itemElement){
-            AffectionManager.getInstance().increaseAffection(instance,20);}
-        else {AffectionManager.getInstance().decreaseAffection(instance,10);}
-        actor.removeItemFromInventory(item);
+
+        List<Element> itemElements = this.item.findCapabilitiesByType(Element.class);
+        if (!itemElements.isEmpty()) {
+            Element itemElement = itemElements.get(0);
+            System.out.println("Ash gives a " + itemElement + " Pokefruit" + " to " + target + "" + AffectionManager.getInstance().printAffection(instance));
+            if (target.findCapabilitiesByType(Element.class).get(0) == itemElement) {
+                AffectionManager.getInstance().increaseAffection(instance, 20);
+            } else {
+                AffectionManager.getInstance().decreaseAffection(instance, 10);
+            }
+            actor.removeItemFromInventory(item);
+        }
         return "";
     }
 

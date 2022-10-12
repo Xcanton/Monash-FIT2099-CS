@@ -8,10 +8,7 @@ import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.weapons.IntrinsicWeapon;
-import game.behaviours.AttackAction;
-import game.behaviours.AttackBehaviour;
-import game.behaviours.Behaviour;
-import game.behaviours.FollowBehaviour;
+import game.behaviours.*;
 import game.items.Blaze;
 import game.items.Ember;
 import game.items.FireSpin;
@@ -47,18 +44,22 @@ public class Charizard extends Actor implements TimePerception, Affection {
         this.addCapability(Element.DRAGON);
         this.addCapability(Status.POKEMON);
         this.behaviours.put(1, new AttackBehaviour());
+        this.behaviours.put(2, new WanderBehaviour());
         // REQ1: Evolution
         // Scratch (intrinsic attack): refer to Assignment 1 & 2 requirements
         this.intrinsicWeapon=new IntrinsicWeapon(10,"scratches");
         // REQ1: Evolution
         // Ember: refer to Assignment 1 & 2 requirements
         this.ember= new Ember();
+        this.addItemToInventory(this.ember);
         // REQ1: Evolution
         // Blaze (60 damage/90 hit rate): a fire-element weapon item.
         this.blaze= new Blaze();
+        this.addItemToInventory(this.blaze);
         // REQ1: Evolution
-        // Blaze (60 damage/90 hit rate): a fire-element weapon item.
+        // Blaze (70 damage/90 hit rate): a fire-element weapon item.
         this.fireSpin= new FireSpin();
+        this.addItemToInventory(this.fireSpin);
         this.registerInstance();
         this.registerAffection();
     }

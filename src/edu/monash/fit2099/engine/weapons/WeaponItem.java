@@ -54,11 +54,4 @@ public abstract class WeaponItem extends Item implements Weapon {
 	 */
 	public int chanceToHit(){return hitRate;}
 
-	@Override
-	public void tick(Location currentLocation, Actor actor) {
-	}
-
-	@Override
-	public void tick(Location currentLocation) {
-	}
 }

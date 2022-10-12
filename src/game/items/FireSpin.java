@@ -5,6 +5,7 @@ import edu.monash.fit2099.engine.positions.Location;
 import edu.monash.fit2099.engine.weapons.WeaponItem;
 import game.utils.Element;
 import game.utils.SpawnManager;
+import game.utils.Tools;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,30 +28,13 @@ public class FireSpin extends WeaponItem {
 
     @Override
     public void tick(Location currentLocation, Actor actor) {
-        int x = currentLocation.x();
-        int y = currentLocation.y();
 
-        System.out.print("fire spread");
-        List<Location> functionLocation = new ArrayList<>();
-        functionLocation.add(new Location(currentLocation.map(), x-1, y));
-        functionLocation.add(new Location(currentLocation.map(), x-1, y-1));
-        functionLocation.add(new Location(currentLocation.map(), x, y-1));
-        functionLocation.add(new Location(currentLocation.map(), x+1, y-1));
-        functionLocation.add(new Location(currentLocation.map(), x+1, y));
-        functionLocation.add(new Location(currentLocation.map(), x+1, y+1));
-        functionLocation.add(new Location(currentLocation.map(), x, y+1));
-        functionLocation.add(new Location(currentLocation.map(), x-1, y+1));
+        System.out.println("fire spread");
+        List<Location> functionLocation = Tools.Surrounding(currentLocation);
         for(Location loca : functionLocation){
-            loca.addItem(new Fire());
+            try {
+                SpawnManager.spawnItem(new Location(currentLocation.map(), loca.x(), loca.y()), new Fire());
+            } catch (ArrayIndexOutOfBoundsException ignore) {}
         }
-
-//        SpawnManager.spawnItem(new Location(currentLocation.map(), x-1, y), fire);
-//        SpawnManager.spawnItem(new Location(currentLocation.map(), x-1, y-1), fire);
-//        SpawnManager.spawnItem(new Location(currentLocation.map(), x, y-1), fire);
-//        SpawnManager.spawnItem(new Location(currentLocation.map(), x+1, y-1), fire);
-//        SpawnManager.spawnItem(new Location(currentLocation.map(), x+1, y), fire);
-//        SpawnManager.spawnItem(new Location(currentLocation.map(), x+1, y+1), fire);
-//        SpawnManager.spawnItem(new Location(currentLocation.map(), x, y+1), fire);
-//        SpawnManager.spawnItem(new Location(currentLocation.map(), x-1, y+1), fire);
     }
 }
