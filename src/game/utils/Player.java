@@ -231,11 +231,13 @@ public class Player extends Actor {
 		}catch (ArrayIndexOutOfBoundsException | NullPointerException ignored) {}
 
 		for (Location loca :Surrounding(location)) {
-			Actor temp = gameMap.at(loca.x(), loca.y()).getActor();
-			Affection tempAffection = (Affection) temp;
-			if (Objects.nonNull(temp) && this.affectionManager.getAffedtion(tempAffection) >=100) {
-				actions.add(new EvolvePokemon(loca.x(), loca.y(), gameMap));
-			}
+			try {
+				Actor temp = gameMap.at(loca.x(), loca.y()).getActor();
+				Affection tempAffection = (Affection) temp;
+				if (Objects.nonNull(temp) && this.affectionManager.getAffedtion(tempAffection) >=100) {
+					actions.add(new EvolvePokemon(loca.x(), loca.y(), gameMap));
+				}
+			}catch (ArrayIndexOutOfBoundsException | NullPointerException ignored) {}
 		}
 
 		// Handle multi-turn Actions
