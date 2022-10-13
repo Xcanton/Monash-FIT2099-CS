@@ -8,15 +8,14 @@ import edu.monash.fit2099.engine.items.Item;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.displays.Menu;
 import edu.monash.fit2099.engine.positions.Location;
-import game.action.Catch;
-import game.action.FeedPokefruit;
-import game.action.PickUp;
-import game.action.ReturnPokemon;
+import game.action.*;
 import game.items.Pokeball;
 import game.time.TimePerceptionManager;
 
 import java.util.List;
 import java.util.Objects;
+
+import static game.utils.Tools.Surrounding;
 
 /**
  * Class representing the Player.
@@ -66,8 +65,6 @@ public class Player extends Actor {
 		timePerceptionManager.run();
 		Location location=map.locationOf(this);
 
-
-
 		List<Item> items = map.at(location.x(),location.y()).getItems();
 		if (items.size()!=0)
 		{
@@ -80,6 +77,7 @@ public class Player extends Actor {
 			}
 			if (allow) { actions.add(new PickUp()); }
 		}
+
 		boolean returnPokemon= Player.getPokemon() != null;
 
 		try {
@@ -231,6 +229,14 @@ public class Player extends Actor {
 				actions.add(new FeedPokefruit(location.x() + 1, location.y()-1, gameMap, this.getInventory().get(0) ));
 			}
 		}catch (ArrayIndexOutOfBoundsException | NullPointerException ignored) {}
+
+		for (Location loca :Surrounding(location)) {
+			Actor temp = gameMap.at(loca.x(), loca.y()).getActor();
+			Affection tempAffection = (Affection) temp;
+			if (Objects.nonNull(temp) && this.affectionManager.getAffedtion(tempAffection) >=100) {
+				actions.add(new EvolvePokemon(loca.x(), loca.y(), gameMap));
+			}
+		}
 
 		// Handle multi-turn Actions
 		if (lastAction.getNextAction() != null)

@@ -101,7 +101,7 @@ public class AffectionManager {
      * @param point positive affection modifier
      * @return custom message to be printed by Display instance later.
      */
-    public void increaseAffection(Affection objInstance, int point, GameMap map) {
+    public void increaseAffection(Affection objInstance, int point) {
         int affection=affectionPoints.get(objInstance);
         if (affection+point>100) {
             int difference= 100-affection;
@@ -109,13 +109,13 @@ public class AffectionManager {
             System.out.println(objInstance + " likes it! +" + difference + " affection points");
             System.out.println(objInstance);
             System.out.println(objInstance instanceof EvolvableActor);
-            if (objInstance instanceof EvolvableActor) {
-                EvolvableActor pokemon = (EvolvableActor) objInstance;
-                System.out.println(pokemon);
-                pokemon.EvolveUnit(map);
-                System.out.println(objInstance + " got 100 AP, and it evolves into " + pokemon.nextPokemon);
-                System.out.println(pokemon.durationBeforeEvolution);
-            }
+//            if (objInstance instanceof EvolvableActor) {
+//                EvolvableActor pokemon = (EvolvableActor) objInstance;
+//                System.out.println(pokemon);
+//                pokemon.EvolveUnit(map);
+//                System.out.println(objInstance + " got 100 AP, and it evolves into " + pokemon.nextPokemon);
+//                System.out.println(pokemon.durationBeforeEvolution);
+//            }
         } else{
             affectionPoints.put(objInstance,affection+point);
             System.out.println(objInstance+" likes it! +" + point +" affection points");
@@ -148,5 +148,9 @@ public class AffectionManager {
      */
     public String printAffection(Affection objInstance){
         return ("(AP: "+this.getAffectionPoint(objInstance))+")";
+    }
+
+    public int getAffedtion(Affection objInstance) {
+        return (int)affectionPoints.get(objInstance);
     }
 }
