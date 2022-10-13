@@ -230,6 +230,10 @@ public class Player extends Actor {
 			}
 		}catch (ArrayIndexOutOfBoundsException | NullPointerException ignored) {}
 
+		/*
+		Check surrounding related player action list memu
+		Old code's implementation can be transferred in here
+		 */
 		for (Location loca :Surrounding(location)) {
 			try {
 				Actor temp = gameMap.at(loca.x(), loca.y()).getActor();
