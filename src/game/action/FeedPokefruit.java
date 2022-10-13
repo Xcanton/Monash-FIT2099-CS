@@ -43,7 +43,7 @@ public class FeedPokefruit extends Action {
         List<Element> itemElements = this.item.findCapabilitiesByType(Element.class);
         if (!itemElements.isEmpty()) {
             Element itemElement = itemElements.get(0);
-            System.out.println("Ash gives a " + itemElement + " Pokefruit" + " to " + target + "" + AffectionManager.getInstance().printAffection(instance));
+            System.out.println(actor + " gives a " + itemElement + " Pokefruit" + " to " + target + "" + AffectionManager.getInstance().printAffection(instance));
 
             // speed up testing : giving a fruit will increase AP by 100
              if (target.findCapabilitiesByType(Element.class).get(0) == itemElement) {
@@ -63,6 +63,6 @@ public class FeedPokefruit extends Action {
      */
     @Override
     public String menuDescription(Actor actor) {
-        return "Feed Pokefruit to "+ target;
+        return actor + "Feed Pokefruit to "+ target;
     }
 }

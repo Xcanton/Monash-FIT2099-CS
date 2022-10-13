@@ -9,6 +9,7 @@ import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.World;
 import game.Center.Door;
 import game.Center.PokemonCenter;
+import game.Trainer.Goh;
 import game.environment.*;
 import game.items.Pokefruit;
 import game.pokemons.Bulbasaur;
@@ -81,6 +82,11 @@ public class Application {
 
         Bulbasaur bulbasaur= new Bulbasaur();
         gameMap.at(30,11).addActor(bulbasaur);
+
+
+        Goh goh = new Goh('G', 1, gameMap);
+        gameMap.at(31,11).addActor(goh);
+        goh.addItemToInventory(new Pokefruit(Element.FIRE));
 
         world.run();
 

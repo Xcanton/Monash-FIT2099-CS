@@ -241,7 +241,7 @@ public class Player extends Actor {
 				if (Objects.nonNull(temp) && this.affectionManager.getAffedtion(tempAffection) >=100) {
 					actions.add(new EvolvePokemon(loca.x(), loca.y(), gameMap));
 				}
-			}catch (ArrayIndexOutOfBoundsException | NullPointerException ignored) {}
+			}catch (ArrayIndexOutOfBoundsException | NullPointerException | ClassCastException ignored) {}
 		}
 
 		// Handle multi-turn Actions
@@ -250,7 +250,7 @@ public class Player extends Actor {
 
 
 		// return/print the console menu
-		return menu.showMenu(this, actions, display);
+		return menu.showMenu(this, actions, display, gameMap);
 
 	}
 
