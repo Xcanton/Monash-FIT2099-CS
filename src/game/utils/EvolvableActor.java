@@ -23,7 +23,7 @@ public abstract class EvolvableActor extends Actor implements Evolvable {
     }
 
     @Override
-    public void EvolveUnit(Actor nextActor, GameMap map) {
+    public void EvolveUnit(GameMap map) {
         Location currentLocation = map.locationOf(this);
         map.removeActor(this);
         map.addActor(this.nextPokemon, currentLocation);
@@ -33,7 +33,7 @@ public abstract class EvolvableActor extends Actor implements Evolvable {
     public void Evolve(GameMap map) {
         if (this.durationBeforeEvolution < 0 & Tools.checkOtherActorSurround(this)) {
             System.out.println(this + " evolve to Pokemon: " + this.nextPokemon.toString());
-            EvolveUnit(this.nextPokemon, map);
+            EvolveUnit(map);
         }
     }
 }

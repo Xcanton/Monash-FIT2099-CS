@@ -8,6 +8,7 @@ import edu.monash.fit2099.engine.positions.FancyGroundFactory;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.World;
 import game.environment.*;
+import game.items.Pokefruit;
 import game.pokemons.Bulbasaur;
 import game.pokemons.Charizard;
 import game.pokemons.Charmander;
