@@ -17,5 +17,5 @@ public interface Evolvable {
 
     void Evolve(GameMap map);
 
-    void EvolveUnit(Actor nextActor, GameMap map);
+    void EvolveUnit(GameMap map);
 }

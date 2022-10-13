@@ -45,7 +45,7 @@ public class FeedPokefruit extends Action {
             Element itemElement = itemElements.get(0);
             System.out.println("Ash gives a " + itemElement + " Pokefruit" + " to " + target + "" + AffectionManager.getInstance().printAffection(instance));
             if (target.findCapabilitiesByType(Element.class).get(0) == itemElement) {
-                AffectionManager.getInstance().increaseAffection(instance, 20);
+                AffectionManager.getInstance().increaseAffection(instance, 20, map);
             } else {
                 AffectionManager.getInstance().decreaseAffection(instance, 10);
             }
