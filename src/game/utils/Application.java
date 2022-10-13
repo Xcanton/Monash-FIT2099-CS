@@ -7,6 +7,9 @@ import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.positions.FancyGroundFactory;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.World;
+import game.Center.Door;
+import game.Center.PokemonCenter;
+import game.Trainer.Goh;
 import game.environment.*;
 import game.items.Pokefruit;
 import game.pokemons.Bulbasaur;
@@ -32,15 +35,29 @@ public class Application {
                 new Crater(), new Waterfall(), new Hay(), new Lava());
 
 
+//        List<String> map = Arrays.asList(
+//                ".............................................^^^^^^^^^^^^^^",
+//                "...........,,,................................,.,..^^^^O^^^",
+//                ".....................................................^^^^^^",
+//                "........................................................^^^",
+//                "..........................#######...........,,...........^^",
+//                "..........................#_____#...........,.............^",
+//                "..,,,...............,.....#_____#..........................",
+//                "..,.,......~..............###_###..........................",
+//                "...~~~~~~~~................................................",
+//                "....~~~~~..................................................",
+//                "~~W~~~~.,.....................O....T.,,,...................",
+//                "~~~~~~.,,,...........................,.,...................",
+//                "~~~~~~~~~............................,.....................");
         List<String> map = Arrays.asList(
                 ".............................................^^^^^^^^^^^^^^",
                 "...........,,,................................,.,..^^^^O^^^",
                 ".....................................................^^^^^^",
                 "........................................................^^^",
-                "..........................#######...........,,...........^^",
-                "..........................#_____#...........,.............^",
-                "..,,,...............,.....#_____#..........................",
-                "..,.,......~..............###_###..........................",
+                "............................................,,...........^^",
+                "............................###_............,.............^",
+                "..,,,...............,.......#_#............................",
+                "..,.,......~...............................................",
                 "...~~~~~~~~................................................",
                 "....~~~~~..................................................",
                 "~~W~~~~.,.....................O....T.,,,...................",
@@ -48,12 +65,14 @@ public class Application {
                 "~~~~~~~~~............................,.....................");
         GameMap gameMap = new GameMap(groundFactory, map);
         Tools tools= new Tools(gameMap);
+        world.addGameMap(gameMap);
+        new PokemonCenter(world, gameMap, gameMap.at(29,6), "Pallet Town", groundFactory);
 
         //Add player - Ash
         Player ash = new Player("Ash", '@', 1,gameMap);
-        world.addGameMap(gameMap);
         world.addPlayer(ash, gameMap.at(32, 10));
         ash.setLocation(32,10);
+
         //Add first pokemon - Charmander
         Charmander charmander= new Charmander();
         gameMap.at(31,10).addActor(charmander);
@@ -64,9 +83,12 @@ public class Application {
         Bulbasaur bulbasaur= new Bulbasaur();
         gameMap.at(30,11).addActor(bulbasaur);
 
+
+        Goh goh = new Goh('G', 1, gameMap);
+        gameMap.at(31,11).addActor(goh);
+        goh.addItemToInventory(new Pokefruit(Element.FIRE));
+
         world.run();
-
-
 
     }
 }

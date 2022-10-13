@@ -33,6 +33,10 @@ public class FireSpin extends WeaponItem {
         List<Location> functionLocation = Tools.Surrounding(currentLocation);
         for(Location loca : functionLocation){
             try {
+                //  it burns the surrounding (8 squares) by dropping a Fire v
+                //  Since the request document says dropping a Fire, weapon: Fire Spin drops fires at surrounding locations,
+                //  which would cost multiple fire item on the same location, and player got burnt several times.
+                //  here we follow the requirement to achieve this function.
                 SpawnManager.spawnItem(new Location(currentLocation.map(), loca.x(), loca.y()), new Fire());
             } catch (ArrayIndexOutOfBoundsException ignore) {}
         }

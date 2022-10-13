@@ -14,11 +14,6 @@ public class Floor extends Ground {
 	public Floor() {
 		super('_');
 	}
-
-	@Override
-	public boolean canActorEnter(Actor actor) {
-		return false;
-	}
 	@Override
 	public boolean blocksThrownObjects() {
 		return true;

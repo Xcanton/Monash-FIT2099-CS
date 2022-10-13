@@ -23,7 +23,7 @@ public class PickUp extends Action {
     public String execute(Actor actor, GameMap map) {
         item=map.at(map.locationOf(actor).x(),map.locationOf(actor).y()).getItems().get(0);
         actor.addItemToInventory(item);
-        return "Ash has picked up "+ item;
+        return actor + " has picked up "+ item;
     }
 
     /**
@@ -33,6 +33,6 @@ public class PickUp extends Action {
      */
     @Override
     public String menuDescription(Actor actor) {
-        return "Ash picks up " + item;
+        return actor + " picks up " + item;
     }
 }

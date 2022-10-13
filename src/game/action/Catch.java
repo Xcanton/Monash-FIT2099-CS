@@ -46,7 +46,7 @@ public class Catch extends Action {
                 Player.registerPokemon(pokeball);
                 Candy candy= new Candy();
                 map.at(xLocation,yLocation).addItem(candy);
-                return "Ash has caught "+ pokeball.getActor();
+                return actor + " has caught "+ pokeball.getActor();
             }
         return "Pokemon catch was unsuccessful";
     }

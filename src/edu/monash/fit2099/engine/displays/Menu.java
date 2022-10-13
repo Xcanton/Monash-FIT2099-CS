@@ -3,6 +3,9 @@ package edu.monash.fit2099.engine.displays;
 import edu.monash.fit2099.engine.actions.Action;
 import edu.monash.fit2099.engine.actions.ActionList;
 import edu.monash.fit2099.engine.actors.Actor;
+import edu.monash.fit2099.engine.positions.GameMap;
+import edu.monash.fit2099.engine.positions.Location;
+import game.Trainer.Goh;
 
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -48,6 +51,47 @@ public class Menu {
 		char key;
 		do {
 			key = display.readChar();
+		} while (!keyToActionMap.containsKey(key));
+
+		return keyToActionMap.get(key);
+	}
+	public Action showMenu(Actor actor, ActionList actions, Display display, GameMap gameMap) {
+		ArrayList<Character> freeChars = new ArrayList<Character>();
+		HashMap<Character, Action> keyToActionMap = new HashMap<Character, Action>();
+
+		for (char i = 'a'; i < 'z'; i++)
+			freeChars.add(i);
+
+		// Show with the actions with hotkeys first;
+		for (Action action : actions.sorted(new SortHotkeysFirst())) {
+			String hotKey = action.hotkey();
+			char c;
+			if (hotKey == null || hotKey == "") {
+				if (freeChars.isEmpty())
+					break; // we've run out of characters to pick from.
+				c = freeChars.get(0);
+			} else {
+				c = hotKey.charAt(0);
+			}
+			freeChars.remove(Character.valueOf(c));
+			keyToActionMap.put(c, action);
+			display.println(c + ": " + action.menuDescription(actor));
+		}
+
+		char key;
+		do {
+			key = display.readChar();
+			if (key=='z'){
+				for (int y : gameMap.getYRange()) {
+					for (int x : gameMap.getXRange()) {
+						Actor temp = gameMap.getActorAt(new Location(gameMap, x, y));
+						if (temp instanceof Goh) {
+							Goh newTemp = (Goh)temp;
+							newTemp.getCurrentState();
+						}
+					}
+				}
+			}
 		} while (!keyToActionMap.containsKey(key));
 
 		return keyToActionMap.get(key);
