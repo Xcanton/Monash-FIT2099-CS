@@ -64,12 +64,14 @@ public class Application {
                 "~~~~~~~~~............................,.....................");
         GameMap gameMap = new GameMap(groundFactory, map);
         Tools tools= new Tools(gameMap);
+        world.addGameMap(gameMap);
+        new PokemonCenter(world, gameMap, gameMap.at(29,6), "Pallet Town", groundFactory);
 
         //Add player - Ash
         Player ash = new Player("Ash", '@', 1,gameMap);
-        world.addGameMap(gameMap);
         world.addPlayer(ash, gameMap.at(32, 10));
         ash.setLocation(32,10);
+
         //Add first pokemon - Charmander
         Charmander charmander= new Charmander();
         gameMap.at(31,10).addActor(charmander);
@@ -80,13 +82,7 @@ public class Application {
         Bulbasaur bulbasaur= new Bulbasaur();
         gameMap.at(30,11).addActor(bulbasaur);
 
-        // test function
-//        gameMap.at(29,6).addItem(new Door("shop outer door", gameMap.at(1,1)));
-        new PokemonCenter(world, gameMap, gameMap.at(29,6), "Pallet Town", groundFactory);
-
         world.run();
-
-
 
     }
 }

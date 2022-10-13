@@ -33,5 +33,8 @@ public class PokemonCenter {
         privateDoor = new Door(outerMapName, this.formerLocation);
         currentMap.at(8,5).addItem(this.privateDoor);
         this.formerLocation.addItem(new Door("Pokemon Center", currentMap.at(8,5)));
+
+        NurseJoy joy = new NurseJoy();
+        currentMap.at(8,2).addActor(joy);
     }
 }
